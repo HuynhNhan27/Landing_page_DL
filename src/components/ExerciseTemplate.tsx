@@ -8,6 +8,7 @@ interface ExerciseTemplateProps {
   title: string;
   children: React.ReactNode;
   backLink: string;
+  description?: string;
 }
 
 export const ExerciseTemplate = ({
@@ -16,6 +17,7 @@ export const ExerciseTemplate = ({
   title,
   children,
   backLink,
+  description,
 }: ExerciseTemplateProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-ocean-surface/10 to-ocean-deep/20">
@@ -35,6 +37,11 @@ export const ExerciseTemplate = ({
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
             {title}
           </h1>
+          {description && (
+            <p className="text-lg text-foreground mb-4 max-w-2xl mx-auto leading-relaxed">
+              {description}
+            </p>
+          )}
           <p className="text-lg text-muted-foreground">
             BTL {btlNumber} - Exercise {exerciseNumber}
           </p>
