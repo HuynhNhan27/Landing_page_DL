@@ -9,6 +9,16 @@ import edaImage2 from "@/assets/1.1/eda_2.png";
 import edaImage3 from "@/assets/1.1/eda_3.png";
 import edaImage4 from "@/assets/1.1/eda_4.png";
 import edaImage5 from "@/assets/1.1/eda_5.png";
+import trainImage1 from "@/assets/1.1/train_1.png";
+import trainImage2 from "@/assets/1.1/train_2.png";
+import trainImage3 from "@/assets/1.1/train_3.png";
+import trainImage4 from "@/assets/1.1/train_4.png";
+import cfmVit1 from "@/assets/1.1/cfm_vit_1.png";
+import cfmVit2 from "@/assets/1.1/cfm_vit_2.png";
+import cfmRes1 from "@/assets/1.1/cfm_res_1.png";
+import cfmRes2 from "@/assets/1.1/cfm_res_2.png";
+import gradResnet1 from "@/assets/1.1/grad_resnet_1.png";
+import gradEffnet1 from "@/assets/1.1/grad_effnet_1.png";
 
 const BTL1_Exercise1 = () => {
   const sections = [
@@ -584,6 +594,743 @@ const BTL1_Exercise1 = () => {
                       </Card>
                     </CardContent>
                   </Card>
+                </div>
+              ) : idx === 4 ? (
+                // Training Results Section
+                <div className="space-y-8 max-w-6xl mx-auto">
+                  {/* ResNet50 Results */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-blue-500/10 text-blue-600 border-blue-500/30">ResNet50</Badge>
+                      <CardTitle>Kết quả Training - ResNet50</CardTitle>
+                      <CardDescription>So sánh 3 chiến lược fine-tuning trên mô hình ResNet50</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={trainImage1}
+                        alt="ResNet50 training results"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Mô hình</TableHead>
+                              <TableHead className="text-right font-bold">Accuracy</TableHead>
+                              <TableHead className="text-right font-bold">Precision</TableHead>
+                              <TableHead className="text-right font-bold">Recall</TableHead>
+                              <TableHead className="text-right font-bold">F1</TableHead>
+                              <TableHead className="text-right font-bold">Loss</TableHead>
+                              <TableHead className="text-right font-bold">Time/Epoch (s)</TableHead>
+                              <TableHead className="text-right font-bold">Tham số Học</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="font-medium">Freeze</TableCell>
+                              <TableCell className="text-right">0.83543</TableCell>
+                              <TableCell className="text-right">0.84271</TableCell>
+                              <TableCell className="text-right">0.83543</TableCell>
+                              <TableCell className="text-right">0.8346</TableCell>
+                              <TableCell className="text-right">0.49644</TableCell>
+                              <TableCell className="text-right bg-yellow-100/50">33.52</TableCell>
+                              <TableCell className="text-right font-mono">22,539</TableCell>
+                            </TableRow>
+                            <TableRow className="bg-green-50/50">
+                              <TableCell className="font-semibold">Partial</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.88771</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.89132</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.88771</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.88831</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.31326</TableCell>
+                              <TableCell className="text-right">33.73</TableCell>
+                              <TableCell className="text-right font-mono">22,085,643</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="font-medium">Fine-tune</TableCell>
+                              <TableCell className="text-right">0.88093</TableCell>
+                              <TableCell className="text-right">0.88462</TableCell>
+                              <TableCell className="text-right">0.88093</TableCell>
+                              <TableCell className="text-right">0.88095</TableCell>
+                              <TableCell className="text-right">0.3167</TableCell>
+                              <TableCell className="text-right">36.64</TableCell>
+                              <TableCell className="text-right font-mono">23,530,571</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <Alert className="border-blue-500/30 bg-blue-500/5">
+                        <Info className="h-4 w-4 text-blue-600" />
+                        <AlertDescription className="text-sm">
+                          <strong>Nhận xét:</strong> ResNet50 cho kết quả tốt với F1 từ 0.83 đến 0.88. Chiến lược Partial unfreeze đạt kết quả tốt nhất (F1 = 0.88831) với thời gian training nhanh nhất. Giữa Partial và Fine-tune không có khác biệt lớn vì số lượng tham số gần như tương đương (~22M).
+                        </AlertDescription>
+                      </Alert>
+                    </CardContent>
+                  </Card>
+
+                  {/* EfficientNet_b0 Results */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-orange-500/10 text-orange-600 border-orange-500/30">EfficientNet_b0</Badge>
+                      <CardTitle>Kết quả Training - EfficientNet_b0</CardTitle>
+                      <CardDescription>So sánh 3 chiến lược fine-tuning trên mô hình EfficientNet_b0</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={trainImage2}
+                        alt="EfficientNet_b0 training results"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Mô hình</TableHead>
+                              <TableHead className="text-right font-bold">Accuracy</TableHead>
+                              <TableHead className="text-right font-bold">Precision</TableHead>
+                              <TableHead className="text-right font-bold">Recall</TableHead>
+                              <TableHead className="text-right font-bold">F1</TableHead>
+                              <TableHead className="text-right font-bold">Loss</TableHead>
+                              <TableHead className="text-right font-bold">Time/Epoch (s)</TableHead>
+                              <TableHead className="text-right font-bold">Tham số Học</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="font-medium">Freeze</TableCell>
+                              <TableCell className="text-right">0.69894</TableCell>
+                              <TableCell className="text-right">0.70746</TableCell>
+                              <TableCell className="text-right">0.69894</TableCell>
+                              <TableCell className="text-right">0.69855</TableCell>
+                              <TableCell className="text-right">1.03972</TableCell>
+                              <TableCell className="text-right bg-yellow-100/50">32.99</TableCell>
+                              <TableCell className="text-right">14,091</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="font-medium">Partial</TableCell>
+                              <TableCell className="text-right">0.79864</TableCell>
+                              <TableCell className="text-right">0.80424</TableCell>
+                              <TableCell className="text-right">0.79864</TableCell>
+                              <TableCell className="text-right">0.79917</TableCell>
+                              <TableCell className="text-right">0.62023</TableCell>
+                              <TableCell className="text-right">32.85</TableCell>
+                              <TableCell className="text-right font-mono">2,757,671</TableCell>
+                            </TableRow>
+                            <TableRow className="bg-green-50/50">
+                              <TableCell className="font-semibold">Fine-tune</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.82962</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.83559</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.82962</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.83022</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.51317</TableCell>
+                              <TableCell className="text-right">34.40</TableCell>
+                              <TableCell className="text-right font-mono">4,021,639</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <Alert className="border-orange-500/30 bg-orange-500/5">
+                        <Info className="h-4 w-4 text-orange-600" />
+                        <AlertDescription className="text-sm">
+                          <strong>Nhận xét:</strong> EfficientNet_b0 cho kết quả chênh lệch hơn so với ResNet (F1 từ 0.69 đến 0.83). Khoảng cách giữa các chiến lược cũng có sự khác biệt rõ rệt hơn. Fine-tune đạt kết quả tốt nhất, cho thấy mô hình cần huấn luyện đầy đủ để đạt hiệu suất cao.
+                        </AlertDescription>
+                      </Alert>
+                    </CardContent>
+                  </Card>
+
+                  {/* ViT_base Results */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-purple-500/10 text-purple-600 border-purple-500/30">ViT_base</Badge>
+                      <CardTitle>Kết quả Training - ViT_base</CardTitle>
+                      <CardDescription>So sánh 3 chiến lược fine-tuning trên mô hình Vision Transformer</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={trainImage3}
+                        alt="ViT_base training results"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Mô hình</TableHead>
+                              <TableHead className="text-right font-bold">Accuracy</TableHead>
+                              <TableHead className="text-right font-bold">Precision</TableHead>
+                              <TableHead className="text-right font-bold">Recall</TableHead>
+                              <TableHead className="text-right font-bold">F1</TableHead>
+                              <TableHead className="text-right font-bold">Loss</TableHead>
+                              <TableHead className="text-right font-bold">Time/Epoch (s)</TableHead>
+                              <TableHead className="text-right font-bold">Tham số Học</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="font-medium">Freeze</TableCell>
+                              <TableCell className="text-right">0.9061</TableCell>
+                              <TableCell className="text-right">0.90812</TableCell>
+                              <TableCell className="text-right">0.9061</TableCell>
+                              <TableCell className="text-right">0.90581</TableCell>
+                              <TableCell className="text-right">0.3024</TableCell>
+                              <TableCell className="text-right bg-yellow-100/50">43.47</TableCell>
+                              <TableCell className="text-right font-mono">8,459</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="font-medium">Partial</TableCell>
+                              <TableCell className="text-right">0.92449</TableCell>
+                              <TableCell className="text-right">0.92557</TableCell>
+                              <TableCell className="text-right">0.92449</TableCell>
+                              <TableCell className="text-right">0.92427</TableCell>
+                              <TableCell className="text-right">0.24037</TableCell>
+                              <TableCell className="text-right">57.33</TableCell>
+                              <TableCell className="text-right font-mono">21,272,075</TableCell>
+                            </TableRow>
+                            <TableRow className="bg-green-50/50">
+                              <TableCell className="font-semibold">Fine-tune</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93611</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93774</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93611</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.9357</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.19719</TableCell>
+                              <TableCell className="text-right">99.02</TableCell>
+                              <TableCell className="text-right font-mono">85,807,115</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <Alert className="border-purple-500/30 bg-purple-500/5">
+                        <Info className="h-4 w-4 text-purple-600" />
+                        <AlertDescription className="text-sm">
+                          <strong>Nhận xét:</strong> ViT_base outperform cả ResNet50 và EfficientNet_b0, đạt F1 = 0.9357 ở mức fine-tune. Thậm chí khi chỉ freeze backbone (freeze), mô hình vẫn cho kết quả rất tốt (F1 = 0.90581). Tuy nhiên, thời gian training và số lượng tham số cần học lại lớn hơn rất nhiều (99s/epoch, 85M tham số).
+                        </AlertDescription>
+                      </Alert>
+                    </CardContent>
+                  </Card>
+
+                  {/* Comparison Results */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-indigo-500/10 text-indigo-600 border-indigo-500/30">So sánh</Badge>
+                      <CardTitle>So sánh Mô hình Tốt Nhất</CardTitle>
+                      <CardDescription>Mô hình đạt hiệu suất tốt nhất từ mỗi nhóm</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={trainImage4}
+                        alt="Best models comparison"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Mô hình</TableHead>
+                              <TableHead className="text-right font-bold">Accuracy</TableHead>
+                              <TableHead className="text-right font-bold">Precision</TableHead>
+                              <TableHead className="text-right font-bold">Recall</TableHead>
+                              <TableHead className="text-right font-bold">F1</TableHead>
+                              <TableHead className="text-right font-bold">Loss</TableHead>
+                              <TableHead className="text-right font-bold">Time/Epoch (s)</TableHead>
+                              <TableHead className="text-right font-bold">Tham số Học</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            <TableRow>
+                              <TableCell className="font-semibold">ResNet50 Partial</TableCell>
+                              <TableCell className="text-right">0.88771</TableCell>
+                              <TableCell className="text-right">0.89132</TableCell>
+                              <TableCell className="text-right">0.88771</TableCell>
+                              <TableCell className="text-right">0.88831</TableCell>
+                              <TableCell className="text-right">0.31326</TableCell>
+                              <TableCell className="text-right bg-yellow-100/50">33.73</TableCell>
+                              <TableCell className="text-right font-mono">22,085,643</TableCell>
+                            </TableRow>
+                            <TableRow>
+                              <TableCell className="font-semibold">EfficientNet_b0 Fine-tune</TableCell>
+                              <TableCell className="text-right">0.82962</TableCell>
+                              <TableCell className="text-right">0.83559</TableCell>
+                              <TableCell className="text-right">0.82962</TableCell>
+                              <TableCell className="text-right">0.83022</TableCell>
+                              <TableCell className="text-right">0.51317</TableCell>
+                              <TableCell className="text-right">34.40</TableCell>
+                              <TableCell className="text-right font-mono bg-yellow-100/50">4,021,639</TableCell>
+                            </TableRow>
+                            <TableRow className="bg-green-50/50">
+                              <TableCell className="font-semibold">ViT_base Fine-tune</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93611</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93774</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.93611</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.9357</TableCell>
+                              <TableCell className="text-right font-semibold bg-yellow-100/50">0.19719</TableCell>
+                              <TableCell className="text-right">99.02</TableCell>
+                              <TableCell className="text-right font-mono">85,807,115</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <Alert className="border-indigo-500/30 bg-indigo-500/5">
+                        <Info className="h-4 w-4 text-indigo-600" />
+                        <AlertDescription className="text-sm">
+                          <strong>Nhận xét Tổng hợp:</strong> ViT_base vượt trội hơn hai mô hình còn lại với F1 = 0.9357 và Loss = 0.19719 (tốt nhất). ResNet50 Partial cân bằng tốt giữa hiệu suất và chi phí tính toán (33.73s/epoch). EfficientNet_b0 có lợi thế về số lượng tham số và thời gian training nhẹ nhàng, nhưng kết quả thấp hơn. Nhìn chung, kết quả của các mô hình có xu hướng tương quan với số lượng tham số được huấn luyện.
+                        </AlertDescription>
+                      </Alert>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : idx === 5 ? (
+                // Error Analysis Section
+                <div className="space-y-8 max-w-6xl mx-auto">
+                  {/* Confusion Matrix - ViT_base */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-purple-500/10 text-purple-600 border-purple-500/30">ViT_base Fine-tune</Badge>
+                      <CardTitle>Ma trận Nhầm lẫn (Confusion Matrix) - ViT_base</CardTitle>
+                      <CardDescription>Phân tích các lớp được dự đoán sai</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Un-normalized */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-3">Ma trận Un-normalized</h4>
+                          <img
+                            src={cfmVit1}
+                            alt="ViT Confusion Matrix - Unnormalized"
+                            className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                          />
+                        </div>
+
+                        {/* Normalized */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-3">Ma trận Normalized (%)</h4>
+                          <img
+                            src={cfmVit2}
+                            alt="ViT Confusion Matrix - Normalized"
+                            className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                          />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Confusion Matrix - ResNet50 */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-blue-500/10 text-blue-600 border-blue-500/30">ResNet50 Partial</Badge>
+                      <CardTitle>Ma trận Nhầm lẫn (Confusion Matrix) - ResNet50</CardTitle>
+                      <CardDescription>Phân tích các lớp được dự đoán sai</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Un-normalized */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-3">Ma trận Un-normalized</h4>
+                          <img
+                            src={cfmRes1}
+                            alt="ResNet50 Confusion Matrix - Unnormalized"
+                            className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                          />
+                        </div>
+
+                        {/* Normalized */}
+                        <div>
+                          <h4 className="text-sm font-semibold text-foreground mb-3">Ma trận Normalized (%)</h4>
+                          <img
+                            src={cfmRes2}
+                            alt="ResNet50 Confusion Matrix - Normalized"
+                            className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                          />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Confusion Matrix Analysis */}
+                  <Card className="border-2 bg-amber-50/30">
+                    <CardHeader>
+                      <CardTitle>Phân tích Ma trận Nhầm lẫn</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <AlertTriangle className="w-5 h-5 text-amber-600" />
+                          Các lớp dễ nhầm lẫn
+                        </h4>
+                        <p className="text-sm text-muted-foreground mb-3">
+                          Cả hai mô hình đều gặp khó khăn với các lớp sau:
+                        </p>
+                        <ul className="text-sm text-muted-foreground space-y-2 ml-4">
+                          <li><strong>Glaze, Frost, Rime, Rain, Snow:</strong> Các lớp liên quan đến băng, tuyết và mưa dễ bị nhầm lẫn với nhau do hình ảnh tương tự nhau</li>
+                          <li><strong>Fogsmog ↔ Sandstorm:</strong> Hai trường hợp mờ mịt, khó phân biệt, dễ bị nhầm lẫn lẫn nhau</li>
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          Các lớp dễ dự đoán đúng
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          <strong>Dew, Lightning:</strong> Các lớp có đặc trưng rõ ràng và được dự đoán chính xác cao ở cả hai mô hình.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* GradCAM - Correct Case */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-green-500/10 text-green-600 border-green-500/30">Dự đoán Đúng</Badge>
+                      <CardTitle>Grad-CAM: Trường hợp Dự đoán Đúng (ResNet50)</CardTitle>
+                      <CardDescription>Trực quan hóa các vùng quan trọng mà mô hình sử dụng để đưa ra quyết định chính xác</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={gradResnet1}
+                        alt="Grad-CAM ResNet50 correct predictions"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-600" />
+                            Ảnh 1: Rainbow (Cầu vồng)
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            Mô hình bắt được chính xác đường cong cầu vồng trong ảnh. Grad-CAM cho thấy mô hình tập trung vào vùng cung tròn của cầu vồng.
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-green-600" />
+                            Ảnh 2: Frost (Sương muối)
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            Mô hình bắt được vùng đá sương muối trên tay người. Activation map tập trung vào các tinh thể đá và kết cấu sương muối đặc trưng.
+                          </p>
+                        </div>
+
+                        <Alert className="border-green-500/30 bg-green-500/5">
+                          <Info className="h-4 w-4 text-green-600" />
+                          <AlertDescription className="text-sm">
+                            <strong>Nhận xét:</strong> Khi dự đoán đúng, mô hình tập trung vào các đặc trưng hình ảnh đặc trưng của lớp và loại trừ các thông tin không liên quan.
+                          </AlertDescription>
+                        </Alert>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* GradCAM - Wrong Case */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-red-500/10 text-red-600 border-red-500/30">Dự đoán Sai</Badge>
+                      <CardTitle>Grad-CAM: Trường hợp Dự đoán Sai (EfficientNet_b0)</CardTitle>
+                      <CardDescription>Phân tích các vùng mà mô hình sử dụng dẫn đến dự đoán sai</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <img
+                        src={gradEffnet1}
+                        alt="Grad-CAM EfficientNet incorrect predictions"
+                        className="w-full h-auto rounded-lg border border-gray-200 shadow-sm"
+                      />
+
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-red-600" />
+                            Ảnh 1: Fogsmog được dự đoán là Rain (sai)
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            Ảnh tương đối khó phân biệt với cả con người. Cả fogsmog và rain đều có vẻ mờ mịt giống nhau. Mô hình khó phân biệt và bị nhầm lẫn.
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-red-600" />
+                            Ảnh 2: Sai với Confidence cao
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            Mô hình bắt phần không liên quan hoặc không đặc trưng của lớp. Activation map tán mạn, không tập trung vào vùng chính, dẫn đến dự đoán sai.
+                          </p>
+                        </div>
+
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                            <AlertTriangle className="w-5 h-5 text-red-600" />
+                            Ảnh 3: Mẫu khó phân biệt
+                          </h4>
+                          <p className="text-sm text-muted-foreground">
+                            Đây là một mẫu khó, thiếu đặc trưng rõ ràng, khiến cả mô hình nhỏ và lớn đều gặp khó khăn trong dự đoán.
+                          </p>
+                        </div>
+
+                        <Alert className="border-red-500/30 bg-red-500/5">
+                          <Info className="h-4 w-4 text-red-600" />
+                          <AlertDescription className="text-sm">
+                            <strong>Nhận xét:</strong> Khi dự đoán sai, mô hình thường tập trung vào các đặc trưng không liên quan hoặc tán mạn. Các ảnh khó (ambiguous) với đặc trưng mơ hồ là nguyên nhân chính gây sai số.
+                          </AlertDescription>
+                        </Alert>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : idx === 6 ? (
+                // Conclusion Section
+                <div className="space-y-8 max-w-6xl mx-auto">
+                  {/* Main Conclusion */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <CardTitle>Tổng Kết Bài Tập</CardTitle>
+                      <CardDescription>Tổng hợp kết quả, bài học và hướng phát triển future work</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      {/* Key Results */}
+                      <Card className="bg-green-50/50 border border-green-200">
+                        <CardHeader className="pb-3">
+                          <CardTitle className="text-base">✓ Kết quả Chính</CardTitle>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          <div className="grid md:grid-cols-3 gap-4">
+                            <div className="flex items-start gap-3">
+                              <div className="text-2xl font-bold text-green-600">0.9361</div>
+                              <div>
+                                <p className="font-semibold text-foreground">Accuracy Cao nhất</p>
+                                <p className="text-xs text-muted-foreground">ViT_base Fine-tune</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <div className="text-2xl font-bold text-green-600">0.1972</div>
+                              <div>
+                                <p className="font-semibold text-foreground">Loss Thấp nhất</p>
+                                <p className="text-xs text-muted-foreground">ViT_base Fine-tune</p>
+                              </div>
+                            </div>
+                            <div className="flex items-start gap-3">
+                              <div className="text-2xl font-bold text-green-600">0.8883</div>
+                              <div>
+                                <p className="font-semibold text-foreground">F1 Cân bằng tốt</p>
+                                <p className="text-xs text-muted-foreground">ResNet50 Partial</p>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      {/* Model Comparison Summary */}
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-foreground">So sánh Mô hình</h4>
+
+                        <div className="space-y-3">
+                          <div className="flex gap-3 items-start">
+                            <div className="w-3 h-3 bg-purple-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                            <div>
+                              <h5 className="font-semibold text-foreground">ViT_base Fine-tune 🥇</h5>
+                              <p className="text-sm text-muted-foreground">
+                                Kết quả tốt nhất (F1=0.9357, Accuracy=0.9361). Tuy nhiên đòi hỏi thời gian training dài (99s/epoch) và số lượng tham số lớn (85.8M).
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-3 items-start">
+                            <div className="w-3 h-3 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                            <div>
+                              <h5 className="font-semibold text-foreground">ResNet50 Partial 🥈</h5>
+                              <p className="text-sm text-muted-foreground">
+                                Cân bằng tốt giữa hiệu suất (F1=0.8883) và chi phí tính toán (33.73s/epoch). Lựa chọn thực tế cho ứng dụng tực tiếp.
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex gap-3 items-start">
+                            <div className="w-3 h-3 bg-orange-500 rounded-full mt-1.5 flex-shrink-0"></div>
+                            <div>
+                              <h5 className="font-semibold text-foreground">EfficientNet_b0 Fine-tune 🥉</h5>
+                              <p className="text-sm text-muted-foreground">
+                                Mô hình nhẹ nhàng (4.02M tham số, 34.4s/epoch) nhưng kết quả thấp hơn (F1=0.8302). Thích hợp khi có yêu cầu về tốc độ.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Key Findings */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <CardTitle>Những Phát Hiện Quan Trọng</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          Transfer Learning Hiệu Quả
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Chiến lược Partial unfreeze cho kết quả tốt nhất ở ResNet50 (F1=0.8883), chứng tỏ việc giữ lại kiến thức pre-trained từ backbone và tinh chỉnh phần cuối là hiệu quả.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          Kích thước Mô hình Ảnh hưởng Lớn
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Kết quả có xu hướng tương quan với số lượng tham số huấn luyện. ViT_base (85.8M) outperform cả ResNet50 (23.5M) và EfficientNet_b0 (4.02M) đáng kể.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <AlertTriangle className="w-5 h-5 text-amber-600" />
+                          Các Lớp Khó Phân Biệt
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Các lớp: glaze, frost, rime, rain, snow (liên quan đến băng/tuyết) và fogsmog ↔ sandstorm dễ bị nhầm lẫn do hình ảnh tương tự. Cần thêm dữ liệu hoặc xử lý đặc biệt.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
+                          <CheckCircle2 className="w-5 h-5 text-green-600" />
+                          Các Lớp Dễ Dự Đoán
+                        </h4>
+                        <p className="text-sm text-muted-foreground">
+                          Dew (xanh lá), Lightning (tím) và Sandstorm (vàng) có đặc trưng rõ ràng và được dự đoán chính xác cao ở tất cả mô hình.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Challenges */}
+                  <Card className="border-2 bg-red-50/30">
+                    <CardHeader>
+                      <CardTitle>Thách Thức Gặp Phải</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-1">1. Dữ Liệu Không Cân Bằng</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Rainbow (232), Lightning (377) có ít dữ liệu, trong khi Rime (1160), Fogsmog (851) có nhiều. Cần sử dụng weighted loss hoặc oversampling.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-1">2. Ảnh Nhiễu và Kích Thước Không Đồng Đều</h4>
+                        <p className="text-sm text-muted-foreground">
+                          Dữ liệu có định dạng và kênh màu đa dạng (RGB, RGBA, L, P) cần tiền xử lý chuẩn hóa kỹ lưỡng.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h4 className="font-semibold text-foreground mb-1">3. Chi Phí Tính Toán ViT_base</h4>
+                        <p className="text-sm text-muted-foreground">
+                          ViT_base tốt nhất nhưng training rất chậm (99s/epoch = ~27h cho 100 epoch) và cần GPU mạnh. Không thích hợp cho deployment edge.
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Recommendations */}
+                  <Card className="border-2 bg-blue-50/30">
+                    <CardHeader>
+                      <CardTitle>Khuyến Nghị</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="space-y-3">
+                        <div className="flex gap-3">
+                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">1</div>
+                          <div>
+                            <h4 className="font-semibold text-foreground">Sử dụng ResNet50 Partial cho Production</h4>
+                            <p className="text-sm text-muted-foreground">
+                              Cân bằng tốt giữa accuracy (0.8877) và speed (33.73s/epoch). Phù hợp với phần lớn ứng dụng thực tế.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">2</div>
+                          <div>
+                            <h4 className="font-semibold text-foreground">Tăng Cường Dữ Liệu cho Các Lớp Ít</h4>
+                            <p className="text-sm text-muted-foreground">
+                              Sử dụng oversampling, SMOTE, hoặc synthetic data generation cho Rainbow, Lightning, Frost để cải thiện kết quả.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">3</div>
+                          <div>
+                            <h4 className="font-semibold text-foreground">Sử dụng Ensemble Methods</h4>
+                            <p className="text-sm text-muted-foreground">
+                              Combine ResNet50, EfficientNet_b0, và ViT_base để tăng robustness, đặc biệt cho các lớp dễ nhầm lẫn.
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-3">
+                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">4</div>
+                          <div>
+                            <h4 className="font-semibold text-foreground">Thử Vision Transformer Nhẹ Hơn</h4>
+                            <p className="text-sm text-muted-foreground">
+                              ViT_small hoặc ViT_tiny có thể đạt hiệu suất tốt hơn ResNet50 với chi phí tính toán thấp hơn ViT_base.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Lessons Learned */}
+                  <Card className="border-2">
+                    <CardHeader>
+                      <CardTitle>Bài Học Rút Ra</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <ul className="space-y-3 text-sm">
+                        <li className="flex gap-2">
+                          <span className="text-emerald-600 font-bold">•</span>
+                          <span><strong>Transfer Learning là mạnh mẽ:</strong> Pre-trained models giúp đạt kết quả tốt ngay cả với dữ liệu hạn chế.</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-emerald-600 font-bold">•</span>
+                          <span><strong>Partial fine-tuning cân bằng tốt:</strong> Không cần fine-tune toàn bộ, partial unfreeze cho kết quả gần tương đương nhưng nhanh hơn.</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-emerald-600 font-bold">•</span>
+                          <span><strong>EDA là thiết yếu:</strong> Hiểu rõ dữ liệu giúp lựa chọn pre-processing, augmentation, và loss function phù hợp.</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-emerald-600 font-bold">•</span>
+                          <span><strong>Không phải mô hình lớn = kết quả tốt:</strong> ViT_base tốt hơn nhưng chi phí training lớn gấp 3x ResNet50 với cải thiện chỉ ~5%.</span>
+                        </li>
+                        <li className="flex gap-2">
+                          <span className="text-emerald-600 font-bold">•</span>
+                          <span><strong>Interpretability quan trọng:</strong> Grad-CAM giúp hiểu vì sao mô hình dự đoán sai, từ đó cải thiệt được.</span>
+                        </li>
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  {/* Final Thoughts */}
+                  <Alert className="border-emerald-500/30 bg-emerald-500/5">
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                    <AlertDescription className="text-sm">
+                      <strong>Kết Luận:</strong> Bài tập đã thành công trong việc xây dựng mô hình phân loại thời tiết với accuracy 93.61% (ViT_base). Các mô hình khác nhau cho những trade-off khác nhau giữa accuracy, tốc độ, và công suất tính toán. Lựa chọn mô hình cuối cùng phụ thuộc vào yêu cầu cụ thể của ứng dụng: ResNet50 cho production, ViT_base cho maximum accuracy, EfficientNet_b0 cho edge deployment.
+                    </AlertDescription>
+                  </Alert>
                 </div>
               ) : (
                 <Card className="border-2 min-h-64 flex items-center justify-center bg-card/50">
