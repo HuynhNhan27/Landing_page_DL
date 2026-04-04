@@ -8,8 +8,8 @@ export const Footer = () => {
       <div className="container mx-auto relative z-10">
         <div className="text-center space-y-6">
           <div>
-            <h3 className="text-2xl font-bold mb-2">Machine Learning – CO3117</h3>
-            <p className="text-primary-foreground/80">Học kỳ 251 | Nhóm MNTV</p>
+            <h3 className="text-2xl font-bold mb-2">Deep Learning and Its Applications CO3133</h3>
+            <p className="text-primary-foreground/80">Học kỳ 252 | Nhóm DL123</p>
           </div>
 
           <div className="flex justify-center gap-6">
@@ -26,7 +26,7 @@ export const Footer = () => {
 
           <div className="pt-6 border-t border-primary-foreground/20">
             <p className="text-sm text-primary-foreground/70">
-              © 2025 Nhóm MNTV. Machine Learning Assignment.
+              © 2026 Nhóm DL123. Deep Learning Assignment.
             </p>
           </div>
         </div>

@@ -22,16 +22,16 @@ export const GitHubSection = () => {
                 <Github className="w-10 h-10 text-primary" />
               </div>
             </div>
-            <CardTitle className="text-3xl mb-2">BTL_ML_251</CardTitle>
+            <CardTitle className="text-3xl mb-2">DeepLearning</CardTitle>
             <CardDescription className="text-base">
-              Machine Learning Course Projects - CO3117 (HK251)
+              Deep Learning and Its Applications Course Projects - CO3133 (HK252)
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="flex justify-center gap-6 text-sm">
               <div className="flex items-center gap-2">
                 <Star className="w-4 h-4 text-yellow-500" />
-                <span className="text-muted-foreground">Machine Learning</span>
+                <span className="text-muted-foreground">Deep Learning</span>
               </div>
               <div className="flex items-center gap-2">
                 <GitFork className="w-4 h-4 text-primary" />

@@ -3,14 +3,14 @@ import { Mail, User } from "lucide-react";
 
 const teamMembers = [
   {
-    mssv: "2312420",
-    name: "Huỳnh Đức Nhân",
+    mssv: "2310543",
+    name: "Hồ Anh Dũng",
     email: "nhan.huynhgl272@hcmut.edu.vn",
   },
   {
-    mssv: "2312097",
-    name: "Nguyễn Thiện Minh",
-    email: "thienminha5k31@gmail.com",
+    mssv: "2312420",
+    name: "Huỳnh Đức Nhân",
+    email: "nhan.huynhgl272@hcmut.edu.vn",
   },
 ];
 

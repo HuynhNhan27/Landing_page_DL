@@ -6,23 +6,23 @@ import { Link } from "react-router-dom";
 
 const projects = [
   {
-    title: "BTL1 – Data Analysis & Machine Learning",
-    domain: "Tabular Data",
-    description: "Phân tích và dự đoán dữ liệu sử dụng các kỹ thuật học máy cơ bản",
-    status: "In Progress",
+    title: "BTL1",
+    domain: "Classification",
+    description: "Chưa viết :v",
+    status: "Done",
     link: "/btl1",
   },
   {
-    title: "BTL2 – Advanced ML & Deep Learning",
+    title: "BTL2",
     domain: "Text/Image Data",
-    description: "Khám phá các mô hình học sâu và xử lý dữ liệu phức tạp",
+    description: "Chưa viết :v",
     status: "In Progress",
     link: "/btl2",
   },
   {
-    title: "BTL3 – Optimization & Deployment",
+    title: "BTL3",
     domain: "Real-world Applications",
-    description: "Tối ưu hóa mô hình và triển khai vào thực tế",
+    description: "Chưa viết :v",
     status: "In Progress",
     link: "/btl3",
   },
@@ -37,8 +37,8 @@ export const ProjectsSection = () => {
         </h2>
         <div className="w-24 h-1 bg-accent mx-auto mb-6 rounded-full"></div>
         <p className="text-center text-muted-foreground mb-12 max-w-3xl mx-auto text-lg">
-          Repo này chứa 3 bài tập lớn về học máy và deep learning. Mỗi bài tập gồm 3 bài tập nhỏ,
-          cung cấp trải nghiệm toàn diện từ cơ bản đến nâng cao.
+          Repo này chứa 3 bài tập lớn của môn Học sâu và ứng dụng. Mỗi bài tập lớn gồm 3 bài tập ứng với 3 loại dữ liệu,
+          giúp tăng cường khả năng xử lý trên nhiều task, nhiều loại data khác nhau.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
