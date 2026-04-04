@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Ocean Theme - Light Mode (Daylight Ocean) */
+    --background: 200 60% 97%;
+    --foreground: 210 90% 15%;
+
+    --card: 200 40% 98%;
+    --card-foreground: 210 90% 15%;
+
+    --popover: 200 40% 98%;
+    --popover-foreground: 210 90% 15%;
+
+    --primary: 210 90% 35%;
+    --primary-foreground: 200 30% 98%;
+
+    --secondary: 200 85% 50%;
+    --secondary-foreground: 210 90% 15%;
+
+    --muted: 200 40% 92%;
+    --muted-foreground: 210 20% 45%;
+
+    --accent: 190 80% 55%;
+    --accent-foreground: 210 90% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 200 30% 98%;
+
+    --border: 200 35% 85%;
+    --input: 200 35% 85%;
+    --ring: 210 90% 35%;
+
+    --radius: 0.75rem;
+
+    /* Ocean gradients and effects */
+    --ocean-deep: 220 90% 25%;
+    --ocean-mid: 210 85% 45%;
+    --ocean-light: 200 80% 65%;
+    --ocean-surface: 190 70% 85%;
+    --wave-accent: 185 100% 70%;
+    
+    --gradient-ocean: linear-gradient(135deg, hsl(var(--ocean-deep)), hsl(var(--ocean-mid)), hsl(var(--ocean-light)));
+    --gradient-wave: linear-gradient(90deg, hsl(var(--ocean-light)), hsl(var(--wave-accent)), hsl(var(--ocean-light)));
+  }
+
+  .dark {
+    /* Ocean Theme - Dark Mode (Deep Ocean) */
+    --background: 220 50% 8%;
+    --foreground: 200 30% 95%;
+
+    --card: 220 45% 12%;
+    --card-foreground: 200 30% 95%;
+
+    --popover: 220 45% 12%;
+    --popover-foreground: 200 30% 95%;
+
+    --primary: 200 85% 55%;
+    --primary-foreground: 220 50% 8%;
+
+    --secondary: 210 60% 25%;
+    --secondary-foreground: 200 30% 95%;
+
+    --muted: 220 40% 18%;
+    --muted-foreground: 200 20% 65%;
+
+    --accent: 190 75% 50%;
+    --accent-foreground: 200 30% 95%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 200 30% 95%;
+
+    --border: 220 40% 20%;
+    --input: 220 40% 20%;
+    --ring: 200 85% 55%;
+
+    /* Ocean gradients - darker */
+    --ocean-deep: 230 60% 12%;
+    --ocean-mid: 220 70% 25%;
+    --ocean-light: 210 75% 40%;
+    --ocean-surface: 200 70% 55%;
+    --wave-accent: 185 90% 60%;
+    
+    --gradient-ocean: linear-gradient(135deg, hsl(var(--ocean-deep)), hsl(var(--ocean-mid)), hsl(var(--ocean-light)));
+    --gradient-wave: linear-gradient(90deg, hsl(var(--ocean-light)), hsl(var(--wave-accent)), hsl(var(--ocean-light)));
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    /* Ocean depth gradient - from surface to deep ocean */
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background)) 0%,
+      hsl(var(--ocean-surface) / 0.1) 20%,
+      hsl(var(--ocean-light) / 0.15) 40%,
+      hsl(var(--ocean-mid) / 0.2) 60%,
+      hsl(var(--ocean-deep) / 0.25) 80%,
+      hsl(var(--ocean-deep) / 0.3) 100%
+    );
+    background-attachment: fixed;
+  }
+
+  /* Ocean wave animations */
+  @keyframes wave {
+    0%, 100% {
+      transform: translateX(0%) translateY(0%);
+    }
+    50% {
+      transform: translateX(-25%) translateY(-5%);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -1000px 0;
+    }
+    100% {
+      background-position: 1000px 0;
+    }
+  }
+
+  .animate-wave {
+    animation: wave 15s ease-in-out infinite;
+  }
+
+  .animate-wave-slow {
+    animation: wave 20s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .ocean-gradient {
+    background: var(--gradient-ocean);
+  }
+
+  .wave-gradient {
+    background: var(--gradient-wave);
+  }
+}
