@@ -12,16 +12,6 @@ const teamMembers = [
     name: "Nguyễn Thiện Minh",
     email: "thienminha5k31@gmail.com",
   },
-  {
-    mssv: "2313638",
-    name: "Nguyễn Lưu Khánh Trình",
-    email: "trinh.nguyenktmtbk0711@hcmut.edu.vn",
-  },
-  {
-    mssv: "2313912",
-    name: "Lê Công Vinh",
-    email: "vinh.le020705@hcmut.edu.vn",
-  },
 ];
 
 export const TeamSection = () => {
@@ -29,14 +19,14 @@ export const TeamSection = () => {
     <section className="py-20 px-4 bg-muted/30">
       <div className="container mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 text-primary">
-          Thành viên nhóm MNTV
+          Thành viên nhóm
         </h2>
         <div className="w-24 h-1 bg-accent mx-auto mb-12 rounded-full"></div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {teamMembers.map((member, index) => (
-            <Card 
-              key={member.mssv} 
+            <Card
+              key={member.mssv}
               className="hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-2 border-border bg-card"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -52,8 +42,8 @@ export const TeamSection = () => {
                 </p>
               </CardHeader>
               <CardContent className="text-center">
-                <a 
-                  href={`mailto:${member.email}`} 
+                <a
+                  href={`mailto:${member.email}`}
                   className="flex items-center justify-center gap-2 text-sm text-primary hover:text-accent transition-colors"
                 >
                   <Mail className="w-4 h-4" />
