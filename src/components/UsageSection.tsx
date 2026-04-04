@@ -16,18 +16,22 @@ export const UsageSection = () => {
             </CardHeader>
             <CardContent>
               <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm text-muted-foreground font-mono">
-{`ML251/
-│── data/                       
-    │── tên_data
-        │── raw_data/
-        │── features/
-        │── model_result/
-│── modules/
-│── notebooks/
-│── docs/
-|── report/
-│── README.md
-│── requirements.txt`}
+{`Landing_page_DL/
+│── index.html
+│── assignments/          # Các bài tập lớn
+│── assets/               # Tài nguyên dùng chung
+│── btl1/                 # Bài tập lớn 1
+│   ├── notebooks/        # Jupyter Notebooks
+│   ├── data/             # Dữ liệu
+│   ├── artifacts/        # Kết quả chạy
+│   ├── reports/          # Báo cáo chi tiết
+│   └── demo/             # Demo assets
+│── btl2/                 # Bài tập lớn 2 (placeholder)
+│── btl3/                 # Bài tập lớn 3 (placeholder)
+│── docs/                 # Tài liệu dùng chung
+│── logs/                 # Nhật ký thực thi
+│── reports/              # Báo cáo BTL
+└── README.md`}
               </pre>
             </CardContent>
           </Card>
@@ -47,8 +51,8 @@ export const UsageSection = () => {
                 </p>
                 <div className="bg-muted p-4 rounded-lg overflow-x-auto">
                   <pre className="text-sm text-muted-foreground font-mono">
-{`git clone https://github.com/HuynhNhan27/BTL_ML_251.git
-cd BTL_ML_251
+{`git clone https://github.com/dung-h/DeepLearning.git
+cd DeepLearning
 
 # Tạo môi trường ảo
 python -m venv venv

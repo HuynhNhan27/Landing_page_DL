@@ -7,24 +7,24 @@ const BTL1Detail = () => {
   const exercises = [
     {
       number: 1,
-      title: "Tổng quan dữ liệu",
-      description: "Khám phá và phân tích cấu trúc dữ liệu, thống kê cơ bản, và đặc trưng của tập dữ liệu.",
+      title: "Weather Image Recognition",
+      description: "Khám phá dữ liệu hình ảnh về thời tiết và xây dựng mô hình ResNet, EfficientNet và ViT.",
       link: "/btl1/exercise1",
-      topics: ["Dataset Overview", "Statistics", "Data Quality"],
+      topics: ["Image", "Classification", "Fine-tune"],
     },
     {
       number: 2,
-      title: "EDA & Phân tích dữ liệu",
-      description: "Thực hiện phân tích khám phá dữ liệu, đóc phân phối, và tìm ra các mối quan hệ giữa các biến.",
+      title: "Toxic Comment Classification Challenge",
+      description: "Khám phá dữ liệu văn bản và xây dựng mô hình BERT, LSTM.",
       link: "/btl1/exercise2",
-      topics: ["Data Exploration", "Visualization", "Correlation"],
+      topics: ["Text", "Classification", "Fine-tune"],
     },
     {
       number: 3,
-      title: "Xử lý, mô hình & Kết luận",
-      description: "Tiền xử lý dữ liệu, xây dựng mô hình học máy, và đánh giá kết quả.",
+      title: "N24News Multimodal Classification",
+      description: "Khám phá dữ liệu ảnh-văn bản và xây dựng mô hình CLIP, VisualBERT.",
       link: "/btl1/exercise3",
-      topics: ["Preprocessing", "Modeling", "Evaluation"],
+      topics: ["Text-Image", "Classification", "Fine-tune"],
     },
   ];
 
@@ -44,11 +44,10 @@ const BTL1Detail = () => {
       <section className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-            BTL 1 - Data Analysis & Machine Learning
+            BTL 1 - Classification
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Khám phá quy trình phân tích dữ liệu toàn diện, từ khám phá dữ liệu đầu tiên đến xây dựng
-            và đánh giá mô hình học máy. Bài tập được chia thành 3 phần chính để tập trung vào từng khía cạnh.
+            Khám phá dữ liệu hình ảnh, văn bản và hình ảnh-văn bản. Đồng thời, xây dựng mô hình phân loại ứng với 3 loại dữ liệu.
           </p>
         </div>
 

@@ -8,7 +8,7 @@ const projects = [
   {
     title: "BTL1",
     domain: "Classification",
-    description: "Chưa viết :v",
+    description: "Bài toán phân loại với 3 loại dữ liệu: Text, Image và Text-Image",
     status: "Done",
     link: "/btl1",
   },

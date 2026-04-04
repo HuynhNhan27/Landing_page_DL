@@ -39,7 +39,7 @@ export const Hero = () => {
             className="bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all"
             asChild
           >
-            <a href="https://github.com/HuynhNhan27/BTL_ML_251" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+            <a href="https://github.com/dung-h/DeepLearning" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
               <Github className="w-5 h-5" />
               GitHub Repository
             </a>

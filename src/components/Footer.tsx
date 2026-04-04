@@ -14,7 +14,7 @@ export const Footer = () => {
 
           <div className="flex justify-center gap-6">
             <a 
-              href="https://github.com/HuynhNhan27/BTL_ML_251" 
+              href="https://github.com/dung-h/DeepLearning" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 hover:text-accent transition-colors"

@@ -5,7 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/BTL_ML_251/",
+  base: "/DeepLearning/",
   server: {
     host: "::",
     port: 8080,

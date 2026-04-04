@@ -9,27 +9,27 @@ const goals = [
   },
   {
     icon: Code2,
-    title: "Xử lý dữ liệu & Feature Engineering",
-    description: "Làm sạch, biến đổi và tạo features mới để tối ưu hiệu suất mô hình",
+    title: "Xử lý & làm giàu dữ liệu ",
+    description: "Làm sạch, làm giàu dữ liệu cho quá trình train",
   },
   {
     icon: Target,
-    title: "Xây dựng pipeline ML",
-    description: "Phát triển pipeline cho cả học máy truyền thống và học sâu",
+    title: "Xây dựng & huấn luyện mô hình DL",
+    description: "Phát triển các mô hình học sâu tương ứng với loại dữ liệu",
   },
   {
     icon: FileText,
-    title: "Huấn luyện & đánh giá mô hình",
-    description: "Training, evaluation và so sánh các mô hình để chọn giải pháp tối ưu",
+    title: "Phân tích kết quả mô hình",
+    description: "Phân tích kết quả metric, đánh giá dự đoán mẫu của mô hình",
   },
 ];
 
 const skills = [
-  "NumPy & Pandas",
-  "Scikit-learn",
-  "TensorFlow / PyTorch",
+  "EDA Data",
+  "PyTorch, Hugging Face",
   "Data Visualization",
   "Model Evaluation",
+  "Error Analysis",
   "Team Collaboration",
 ];
 
@@ -44,7 +44,7 @@ export const GoalsSection = () => {
 
         <div className="max-w-5xl mx-auto mb-16">
           <p className="text-lg text-center text-muted-foreground mb-12">
-            Nội dung bài tập trải dài trên ba dạng dữ liệu phổ biến: dữ liệu dạng bảng, dữ liệu văn bản và dữ liệu ảnh. 
+            Nội dung bài tập trải dài trên ba dạng dữ liệu phổ biến: dữ liệu ảnh, dữ liệu văn bản và dữ liệu ảnh-văn bản. 
             Mỗi dạng dữ liệu đều có những đặc thù riêng, yêu cầu những phương pháp xử lý và mô hình phù hợp.
           </p>
 
