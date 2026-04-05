@@ -28,6 +28,7 @@ const BTL1_Exercise1 = () => {
     { icon: Cpu, title: "Mô hình", color: "text-green-600" },
     { icon: TrendingUp, title: "Kết quả Training", color: "text-cyan-600" },
     { icon: AlertTriangle, title: "Phân tích lỗi", color: "text-red-600" },
+    { icon: BarChart3, title: "Thử nghiệm khác", color: "text-indigo-600" },
     { icon: CheckCircle2, title: "Kết luận", color: "text-emerald-600" },
   ];
 
@@ -1086,6 +1087,400 @@ const BTL1_Exercise1 = () => {
                   </Card>
                 </div>
               ) : idx === 6 ? (
+                // Other Experiments Section
+                <div className="space-y-8 max-w-6xl mx-auto">
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-indigo-500/10 text-indigo-600 border-indigo-500/30">So sánh</Badge>
+                      <CardTitle>Thử nghiệm Augmentation vs No-Augmentation</CardTitle>
+                      <CardDescription>So sánh ảnh hưởng của Data Augmentation trên 3 loại mô hình</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <Alert className="border-indigo-500/30 bg-indigo-500/5">
+                        <Info className="h-4 w-4 text-indigo-600" />
+                        <AlertDescription className="text-sm">
+                          Kiểm tra xem Data Augmentation có thực sự cải thiện hiệu suất mô hình hay không. Bảng dưới so sánh các metrics chính giữa hai trường hợp: có augmentation (sử dụng RandomResizeCrop, RandomHorizontalFlip, RandomRotation, ColorJitter) và không augmentation (chỉ resize và normalize).
+                        </AlertDescription>
+                      </Alert>
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Metric</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">ResNet50 Finetune</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">EfficientNet_b0 Finetune</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">ViT Base Finetune</TableHead>
+                            </TableRow>
+                            <TableRow className="bg-muted/30">
+                              <TableHead className="font-bold"></TableHead>
+                              <TableHead className="text-center font-bold text-sm">Có Aug</TableHead>
+                              <TableHead className="text-center font-bold text-sm">Không Aug</TableHead>
+                              <TableHead className="text-center font-bold text-sm">Có Aug</TableHead>
+                              <TableHead className="text-center font-bold text-sm">Không Aug</TableHead>
+                              <TableHead className="text-center font-bold text-sm">Có Aug</TableHead>
+                              <TableHead className="text-center font-bold text-sm">Không Aug</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {/* Accuracy */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Accuracy</TableCell>
+                              <TableCell className="text-center">0.88093</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.90416</TableCell>
+                              <TableCell className="text-center">0.82962</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.83446</TableCell>
+                              <TableCell className="text-center">0.93611</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.93901</TableCell>
+                            </TableRow>
+
+                            {/* F1 Score */}
+                            <TableRow>
+                              <TableCell className="font-semibold">F1 Score</TableCell>
+                              <TableCell className="text-center">0.88905</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.90433</TableCell>
+                              <TableCell className="text-center">0.83022</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.83358</TableCell>
+                              <TableCell className="text-center">0.9357</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.93886</TableCell>
+                            </TableRow>
+
+                            {/* Loss */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Loss</TableCell>
+                              <TableCell className="text-center">0.3167</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.29108</TableCell>
+                              <TableCell className="text-center">0.51317</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.53858</TableCell>
+                              <TableCell className="text-center">0.19719</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.19101</TableCell>
+                            </TableRow>
+
+                            {/* Time per Epoch */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Time/Epoch (s)</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">36.64</TableCell>
+                              <TableCell className="text-center">34.17</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">34.40</TableCell>
+                              <TableCell className="text-center">22.99</TableCell>
+                              <TableCell className="text-center">99.02</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">98.53</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <div className="space-y-6">
+                        <Card className="bg-amber-50/50 border border-amber-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">📊 Phân tích Chi Tiết</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            {/* ResNet50 */}
+                            <div>
+                              <h4 className="font-semibold text-blue-700 mb-2">ResNet50 Finetune</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết luận:</strong> <span className="text-red-600 font-semibold">Augmentation làm giảm hiệu suất</span> (Accuracy: 88.09% → 90.42%, Loss: 0.3167 → 0.2911).
+                                </p>
+                                <p>
+                                  Mặc dù augmentation được kỳ vọng giúp tổng quát hóa, nhưng trong trường hợp này, ResNet50 đã overfit dữ liệu augmented. Không augmentation cho kết quả tốt hơn.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* EfficientNet_b0 */}
+                            <div>
+                              <h4 className="font-semibold text-orange-700 mb-2">EfficientNet_b0 Finetune</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết luận:</strong> <span className="text-red-600 font-semibold">Augmentation cũng làm giảm hiệu suất</span> (Accuracy: 82.96% → 83.45%, Loss: 0.5132 → 0.5386).
+                                </p>
+                                <p>
+                                  EfficientNet_b0 cũng có xu hướng tương tự, augmentation không cải thiện mà còn làm giảm performance. Không augmentation cải thiện accuracy thêm ~0.5%.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* ViT Base */}
+                            <div>
+                              <h4 className="font-semibold text-purple-700 mb-2">ViT Base Finetune</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết luận:</strong> <span className="text-red-600 font-semibold">Augmentation làm giảm hiệu suất</span> (Accuracy: 93.61% → 93.90%, Loss: 0.1972 → 0.1910).
+                                </p>
+                                <p>
+                                  Tương tự như hai mô hình kia, ViT base cũng cho thấy rằng không augmentation tốt hơn. Điều này khá bất ngờ vì augmentation thường được expect giúp cải thiện.
+                                </p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-blue-50/50 border border-blue-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">💡 Nhận Xét Tổng Quát</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">1. Augmentation Không Luôn Cải Thiện</h5>
+                              <p className="text-sm text-blue-800">
+                                Dữ liệu trong bài này có thể đã đủ đặc trưng rõ ràng, và augmentation (xoay, lật, crop) có thể làm thay đổi các đặc trưng quan trọng của thời tiết, dẫn đến mô hình khó học.
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">2. ResNet50 Mất 2.3% Accuracy do Augmentation</h5>
+                              <p className="text-sm text-blue-800">
+                                Sự sụt giảm đáng kể cho thấy mô hình này nhạy cảm với augmentation. Có thể chiến lược augmentation cần được điều chỉnh (ví dụ: giảm rotation angle, probability).
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">3. Thời Gian Training Không Đáng Kể</h5>
+                              <p className="text-sm text-blue-800">
+                                Sự khác biệt về thời gian training giữa augmented vs non-augmented rất nhỏ (&lt; 2 giây), nên overhead không phải là vấn đề.
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">4. ViT Base Ổn Định Nhất</h5>
+                              <p className="text-sm text-blue-800">
+                                ViT Base có sự khác biệt nhỏ nhất giữa hai trường hợp (~0.3%), cho thấy mô hình này robust hơn đối với augmentation.
+                              </p>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-green-50/50 border border-green-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">✅ Khuyến Nghị</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Không nên sử dụng augmentation</strong> cho bài toán này. Dữ liệu đã đủ đặc trưng để các mô hình học mà không cần làm giàu thêm.</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Nếu muốn dùng augmentation:</strong> Cần điều chỉnh lại các parameters (giảm rotation angle, ColorJitter intensity, chi tăng RandomHorizontalFlip nhẹ).</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Sử dụng models mà không augmentation</strong> để đạt kết quả tốt nhất: ResNet50 (90.42% acc), ViT Base (93.90% acc).</span>
+                              </li>
+                            </ul>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-2">
+                    <CardHeader>
+                      <Badge className="mb-2 bg-indigo-500/10 text-indigo-600 border-indigo-500/30">Learning Rate</Badge>
+                      <CardTitle>Thử nghiệm Learning theo tầng</CardTitle>
+                      <CardDescription>So sánh giữa Learning Rate chung và Learning Rate theo tầng (Layer-wise) trên 3 mô hình với chiến lược Fine-tune</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <Alert className="border-indigo-500/30 bg-indigo-500/5">
+                        <Info className="h-4 w-4 text-indigo-600" />
+                        <AlertDescription className="text-sm">
+                          Kiểm tra xem Learning Rate theo tầng (áp dụng learning rate khác nhau cho các phần khác nhau của mô hình) có cải thiện kết quả so với learning rate chung không. Điều này giúp backbone pre-trained được fine-tune nhẹ nhàng trong khi các lớp sau được học mạnh hơn.
+                        </AlertDescription>
+                      </Alert>
+
+                      <div className="overflow-x-auto">
+                        <Table>
+                          <TableHeader>
+                            <TableRow className="bg-muted/50">
+                              <TableHead className="font-bold">Metric</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">ResNet50 Finetune</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">EfficientNet_b0 Finetune</TableHead>
+                              <TableHead colSpan={2} className="text-center font-bold border-l">ViT Base Finetune</TableHead>
+                            </TableRow>
+                            <TableRow className="bg-muted/30">
+                              <TableHead className="font-bold"></TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Chung</TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Tầng</TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Chung</TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Tầng</TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Chung</TableHead>
+                              <TableHead className="text-center font-bold text-sm">LR Tầng</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {/* Accuracy */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Accuracy</TableCell>
+                              <TableCell className="text-center">0.90416</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.91384</TableCell>
+                              <TableCell className="text-center">0.83446</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.8848</TableCell>
+                              <TableCell className="text-center">0.93901</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.94773</TableCell>
+                            </TableRow>
+
+                            {/* F1 Score */}
+                            <TableRow>
+                              <TableCell className="font-semibold">F1 Score</TableCell>
+                              <TableCell className="text-center">0.90433</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.9132</TableCell>
+                              <TableCell className="text-center">0.83358</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.88431</TableCell>
+                              <TableCell className="text-center">0.93886</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.94747</TableCell>
+                            </TableRow>
+
+                            {/* Loss */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Loss</TableCell>
+                              <TableCell className="text-center">0.29108</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.25568</TableCell>
+                              <TableCell className="text-center">0.53858</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.35352</TableCell>
+                              <TableCell className="text-center">0.19101</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.21195</TableCell>
+                            </TableRow>
+
+                            {/* Time per Epoch */}
+                            <TableRow>
+                              <TableCell className="font-semibold">Time/Epoch (s)</TableCell>
+                              <TableCell className="text-center">34.16501</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">34.12299</TableCell>
+                              <TableCell className="text-center">22.9913</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">23.4108</TableCell>
+                              <TableCell className="text-center">98.52799</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">97.30171</TableCell>
+                            </TableRow>
+                          </TableBody>
+                        </Table>
+                      </div>
+
+                      <div className="space-y-6">
+                        <Card className="bg-amber-50/50 border border-amber-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">📊 Phân tích Chi Tiết theo Mô hình</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-4">
+                            {/* ResNet50 */}
+                            <div>
+                              <h4 className="font-semibold text-blue-700 mb-2">ResNet50 - LR theo tầng cải thiện nhẹ nhàng</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết quả:</strong> <span className="text-green-600 font-semibold">+0.968% Accuracy (0.90416 → 0.91384)</span>
+                                </p>
+                                <p>
+                                  LR theo tầng cải thiện ResNet50 nhưng không đáng kể. Accuracy tăng từ 90.416% → 91.384%, F1 tăng từ 0.90433 → 0.9132, Loss giảm từ 0.29108 → 0.25568. Thời gian training gần như tương đương (34.16s vs 34.12s), nên LR theo tầng không tạo overhead.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* EfficientNet_b0 */}
+                            <div>
+                              <h4 className="font-semibold text-orange-700 mb-2">EfficientNet_b0 - Cải thiện đáng kể nhất</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết quả:</strong> <span className="text-green-600 font-semibold">+5.034% Accuracy (0.83446 → 0.8848)</span>
+                                </p>
+                                <p>
+                                  EfficientNet_b0 có cải thiện rõ rệt nhất với LR theo tầng. Accuracy tăng từ 83.446% → 88.48%, F1 score tăng từ 0.83358 → 0.88431, Loss giảm mạnh từ 0.53858 → 0.35352. Thời gian training tăng nhẹ từ 22.99s → 23.41s (chỉ +0.42s), rất xứng đáng với cải thiện.
+                                </p>
+                              </div>
+                            </div>
+
+                            {/* ViT Base */}
+                            <div>
+                              <h4 className="font-semibold text-purple-700 mb-2">ViT Base - Cải thiện nhẹ nhàng</h4>
+                              <div className="space-y-2 text-sm text-muted-foreground ml-3">
+                                <p>
+                                  <strong className="text-foreground">Kết quả:</strong> <span className="text-green-600 font-semibold">+0.872% Accuracy (0.93901 → 0.94773)</span>
+                                </p>
+                                <p>
+                                  ViT Base đã có accuracy cao sẵn, LR theo tầng cải thiện thêm +0.872%. F1 tăng từ 0.93886 → 0.94747, Loss tăng nhẹ từ 0.19101 → 0.21195 (nhưng vẫn rất tốt). Thời gian training còn giảm từ 98.53s → 97.30s (-1.23s), là một bonus tuyệt vời.
+                                </p>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-blue-50/50 border border-blue-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">💡 Nhận Xét Tổng Quát</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">1. LR theo tầng Có Lợi Ích, Nhưng Mức Độ Khác Nhau</h5>
+                              <p className="text-sm text-blue-800">
+                                Cả 3 mô hình đều cải thiện khi sử dụng Learning Rate theo tầng, nhưng mức độ thay đổi khác nhau. EfficientNet_b0 lợi nhuận từ chiến lược này, trong khi ResNet50 và ViT Base cải thiện nhẹ.
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">2. EfficientNet_b0 Lợi Nhuận Lớn Nhất (+5.034%)</h5>
+                              <p className="text-sm text-blue-800">
+                                EfficientNet_b0 cải thiện từ 83.446% → 88.48%, cho thấy mô hình nhỏ hơn nhạy cảm hơn với chiến lược learning rate. Mô hình nhỏ có thể bị bottleneck bởi learning rate chung, và LR theo tầng giúp unlock potential mạnh mẽ.
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">3. ResNet50 Cải Thiện Nhẹ (+0.968%)</h5>
+                              <p className="text-sm text-blue-800">
+                                ResNet50 từ 90.416% → 91.384%, cải thiện không đáng kể. Điều này cho thấy ResNet50 với fine-tune đã hoạt động tốt sẵn, và LR theo tầng không tạo thêm giá trị lớn (mặc dù vẫn giảm loss từ 0.2911 → 0.2557).
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">4. ViT Base Cải Thiện Nhẹ (+0.872%) Nhưng Nhanh Hơn</h5>
+                              <p className="text-sm text-blue-800">
+                                ViT Base từ 93.901% → 94.773%, cải thiện nhẹ nhàng nhưng thời gian training còn giảm từ 98.53s → 97.30s. Đây là win-win: cải thiện accuracy và nhanh hơn luôn.
+                              </p>
+                            </div>
+
+                            <div>
+                              <h5 className="font-semibold text-blue-900 mb-1">5. Thời Gian Training Không Tăng (Thậm Chí Giảm)</h5>
+                              <p className="text-sm text-blue-800">
+                                ResNet50: 34.16s → 34.12s (-0.04s), EfficientNet_b0: 22.99s → 23.41s (+0.42s) nhẹ, ViT Base: 98.53s → 97.30s (-1.23s). LR theo tầng không tạo overhead tính toán, và thậm chí có thể nhanh hơn.
+                              </p>
+                            </div>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="bg-green-50/50 border border-green-200">
+                          <CardHeader className="pb-3">
+                            <CardTitle className="text-base">✅ Khuyến Nghị</CardTitle>
+                          </CardHeader>
+                          <CardContent className="space-y-3">
+                            <ul className="space-y-2 text-sm text-muted-foreground">
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Sử dụng LR theo tầng cho Fine-tuning:</strong> Kết quả cho thấy lợi ích cho cả 3 mô hình, không có nhược điểm nào besides slight overhead cho EfficientNet_b0 (+0.42s).</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Model tốt nhất:** <strong>ViT Base với LR theo tầng</strong> (94.773% Acc, Loss 0.21195, 97.30s/epoch) - accuracy cao nhất và nhanh.</strong></span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Thứ tự theo độ tốt:</strong> 1) ViT Base LR tầng (94.773%), 2) ResNet50 LR tầng (91.384%), 3) EfficientNet_b0 LR tầng (88.48%)</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Thứ tự theo chi phí:</strong> 1) EfficientNet_b0 (23.41s, 4M params), 2) ResNet50 (34.12s, 23.5M params), 3) ViT Base (97.30s, 85.8M params)</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-green-600 font-bold">•</span>
+                                <span><strong>Cho ứng dụng thực tế:</strong> EfficientNet_b0 với LR tầng là lựa chọn cân bằng tốt (88.48% acc, training nhanh nhất, tham số ít) so với ResNet50 đắt đỏ hơn 1.5x.</span>
+                              </li>
+                            </ul>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              ) : idx === 7 ? (
                 // Conclusion Section
                 <div className="space-y-8 max-w-6xl mx-auto">
                   {/* Main Conclusion */}
@@ -1147,7 +1542,7 @@ const BTL1_Exercise1 = () => {
                             <div>
                               <h5 className="font-semibold text-foreground">ResNet50 Partial 🥈</h5>
                               <p className="text-sm text-muted-foreground">
-                                Cân bằng tốt giữa hiệu suất (F1=0.8883) và chi phí tính toán (33.73s/epoch). Lựa chọn thực tế cho ứng dụng tực tiếp.
+                                Cân bằng tốt giữa hiệu suất (F1=0.8883) và chi phí tính toán (33.73s/epoch). Lựa chọn thực tế cho ứng dụng thực tiếp.
                               </p>
                             </div>
                           </div>
@@ -1210,85 +1605,6 @@ const BTL1_Exercise1 = () => {
                         <p className="text-sm text-muted-foreground">
                           Dew (xanh lá), Lightning (tím) và Sandstorm (vàng) có đặc trưng rõ ràng và được dự đoán chính xác cao ở tất cả mô hình.
                         </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Challenges */}
-                  <Card className="border-2 bg-red-50/30">
-                    <CardHeader>
-                      <CardTitle>Thách Thức Gặp Phải</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-1">1. Dữ Liệu Không Cân Bằng</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Rainbow (232), Lightning (377) có ít dữ liệu, trong khi Rime (1160), Fogsmog (851) có nhiều. Cần sử dụng weighted loss hoặc oversampling.
-                        </p>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-1">2. Ảnh Nhiễu và Kích Thước Không Đồng Đều</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Dữ liệu có định dạng và kênh màu đa dạng (RGB, RGBA, L, P) cần tiền xử lý chuẩn hóa kỹ lưỡng.
-                        </p>
-                      </div>
-
-                      <div>
-                        <h4 className="font-semibold text-foreground mb-1">3. Chi Phí Tính Toán ViT_base</h4>
-                        <p className="text-sm text-muted-foreground">
-                          ViT_base tốt nhất nhưng training rất chậm (99s/epoch = ~27h cho 100 epoch) và cần GPU mạnh. Không thích hợp cho deployment edge.
-                        </p>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Recommendations */}
-                  <Card className="border-2 bg-blue-50/30">
-                    <CardHeader>
-                      <CardTitle>Khuyến Nghị</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="space-y-3">
-                        <div className="flex gap-3">
-                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">1</div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">Sử dụng ResNet50 Partial cho Production</h4>
-                            <p className="text-sm text-muted-foreground">
-                              Cân bằng tốt giữa accuracy (0.8877) và speed (33.73s/epoch). Phù hợp với phần lớn ứng dụng thực tế.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-3">
-                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">2</div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">Tăng Cường Dữ Liệu cho Các Lớp Ít</h4>
-                            <p className="text-sm text-muted-foreground">
-                              Sử dụng oversampling, SMOTE, hoặc synthetic data generation cho Rainbow, Lightning, Frost để cải thiện kết quả.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-3">
-                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">3</div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">Sử dụng Ensemble Methods</h4>
-                            <p className="text-sm text-muted-foreground">
-                              Combine ResNet50, EfficientNet_b0, và ViT_base để tăng robustness, đặc biệt cho các lớp dễ nhầm lẫn.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="flex gap-3">
-                          <div className="text-lg font-bold text-blue-600 flex-shrink-0">4</div>
-                          <div>
-                            <h4 className="font-semibold text-foreground">Thử Vision Transformer Nhẹ Hơn</h4>
-                            <p className="text-sm text-muted-foreground">
-                              ViT_small hoặc ViT_tiny có thể đạt hiệu suất tốt hơn ResNet50 với chi phí tính toán thấp hơn ViT_base.
-                            </p>
-                          </div>
-                        </div>
                       </div>
                     </CardContent>
                   </Card>
