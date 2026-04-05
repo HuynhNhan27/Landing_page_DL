@@ -707,7 +707,7 @@ const BTL1_Exercise1 = () => {
                               <TableCell className="text-right">0.69894</TableCell>
                               <TableCell className="text-right">0.69855</TableCell>
                               <TableCell className="text-right">1.03972</TableCell>
-                              <TableCell className="text-right bg-yellow-100/50">32.99</TableCell>
+                              <TableCell className="text-right">32.99</TableCell>
                               <TableCell className="text-right">14,091</TableCell>
                             </TableRow>
                             <TableRow>
@@ -717,7 +717,7 @@ const BTL1_Exercise1 = () => {
                               <TableCell className="text-right">0.79864</TableCell>
                               <TableCell className="text-right">0.79917</TableCell>
                               <TableCell className="text-right">0.62023</TableCell>
-                              <TableCell className="text-right">32.85</TableCell>
+                              <TableCell className="text-right bg-yellow-100/50">32.85</TableCell>
                               <TableCell className="text-right font-mono">2,757,671</TableCell>
                             </TableRow>
                             <TableRow className="bg-green-50/50">
@@ -1150,8 +1150,8 @@ const BTL1_Exercise1 = () => {
                               <TableCell className="font-semibold">Loss</TableCell>
                               <TableCell className="text-center">0.3167</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">0.29108</TableCell>
-                              <TableCell className="text-center">0.51317</TableCell>
-                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.53858</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.51317</TableCell>
+                              <TableCell className="text-center">0.53858</TableCell>
                               <TableCell className="text-center">0.19719</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">0.19101</TableCell>
                             </TableRow>
@@ -1159,10 +1159,10 @@ const BTL1_Exercise1 = () => {
                             {/* Time per Epoch */}
                             <TableRow>
                               <TableCell className="font-semibold">Time/Epoch (s)</TableCell>
-                              <TableCell className="text-center bg-yellow-100/50 font-semibold">36.64</TableCell>
-                              <TableCell className="text-center">34.17</TableCell>
-                              <TableCell className="text-center bg-yellow-100/50 font-semibold">34.40</TableCell>
-                              <TableCell className="text-center">22.99</TableCell>
+                              <TableCell className="text-center">36.64</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">34.17</TableCell>
+                              <TableCell className="text-center">34.40</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">22.99</TableCell>
                               <TableCell className="text-center">99.02</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">98.53</TableCell>
                             </TableRow>
@@ -1173,7 +1173,7 @@ const BTL1_Exercise1 = () => {
                       <div className="space-y-6">
                         <Card className="bg-amber-50/50 border border-amber-200">
                           <CardHeader className="pb-3">
-                            <CardTitle className="text-base">📊 Phân tích Chi Tiết</CardTitle>
+                            <CardTitle className="text-base">Phân tích Kết quả</CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-4">
                             {/* ResNet50 */}
@@ -1219,7 +1219,7 @@ const BTL1_Exercise1 = () => {
 
                         <Card className="bg-blue-50/50 border border-blue-200">
                           <CardHeader className="pb-3">
-                            <CardTitle className="text-base">💡 Nhận Xét Tổng Quát</CardTitle>
+                            <CardTitle className="text-base">Nhận Xét</CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <div>
@@ -1252,27 +1252,6 @@ const BTL1_Exercise1 = () => {
                           </CardContent>
                         </Card>
 
-                        <Card className="bg-green-50/50 border border-green-200">
-                          <CardHeader className="pb-3">
-                            <CardTitle className="text-base">✅ Khuyến Nghị</CardTitle>
-                          </CardHeader>
-                          <CardContent className="space-y-3">
-                            <ul className="space-y-2 text-sm text-muted-foreground">
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Không nên sử dụng augmentation</strong> cho bài toán này. Dữ liệu đã đủ đặc trưng để các mô hình học mà không cần làm giàu thêm.</span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Nếu muốn dùng augmentation:</strong> Cần điều chỉnh lại các parameters (giảm rotation angle, ColorJitter intensity, chi tăng RandomHorizontalFlip nhẹ).</span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Sử dụng models mà không augmentation</strong> để đạt kết quả tốt nhất: ResNet50 (90.42% acc), ViT Base (93.90% acc).</span>
-                              </li>
-                            </ul>
-                          </CardContent>
-                        </Card>
                       </div>
                     </CardContent>
                   </Card>
@@ -1340,8 +1319,8 @@ const BTL1_Exercise1 = () => {
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">0.25568</TableCell>
                               <TableCell className="text-center">0.53858</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">0.35352</TableCell>
-                              <TableCell className="text-center">0.19101</TableCell>
-                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.21195</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">0.19101</TableCell>
+                              <TableCell className="text-center">0.21195</TableCell>
                             </TableRow>
 
                             {/* Time per Epoch */}
@@ -1349,8 +1328,8 @@ const BTL1_Exercise1 = () => {
                               <TableCell className="font-semibold">Time/Epoch (s)</TableCell>
                               <TableCell className="text-center">34.16501</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">34.12299</TableCell>
-                              <TableCell className="text-center">22.9913</TableCell>
-                              <TableCell className="text-center bg-yellow-100/50 font-semibold">23.4108</TableCell>
+                              <TableCell className="text-center bg-yellow-100/50 font-semibold">22.9913</TableCell>
+                              <TableCell className="text-center">23.4108</TableCell>
                               <TableCell className="text-center">98.52799</TableCell>
                               <TableCell className="text-center bg-yellow-100/50 font-semibold">97.30171</TableCell>
                             </TableRow>
@@ -1361,7 +1340,7 @@ const BTL1_Exercise1 = () => {
                       <div className="space-y-6">
                         <Card className="bg-amber-50/50 border border-amber-200">
                           <CardHeader className="pb-3">
-                            <CardTitle className="text-base">📊 Phân tích Chi Tiết theo Mô hình</CardTitle>
+                            <CardTitle className="text-base">Phân tích Kết quả</CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-4">
                             {/* ResNet50 */}
@@ -1407,7 +1386,7 @@ const BTL1_Exercise1 = () => {
 
                         <Card className="bg-blue-50/50 border border-blue-200">
                           <CardHeader className="pb-3">
-                            <CardTitle className="text-base">💡 Nhận Xét Tổng Quát</CardTitle>
+                            <CardTitle className="text-base">Nhận Xét</CardTitle>
                           </CardHeader>
                           <CardContent className="space-y-3">
                             <div>
@@ -1444,36 +1423,6 @@ const BTL1_Exercise1 = () => {
                                 ResNet50: 34.16s → 34.12s (-0.04s), EfficientNet_b0: 22.99s → 23.41s (+0.42s) nhẹ, ViT Base: 98.53s → 97.30s (-1.23s). LR theo tầng không tạo overhead tính toán, và thậm chí có thể nhanh hơn.
                               </p>
                             </div>
-                          </CardContent>
-                        </Card>
-
-                        <Card className="bg-green-50/50 border border-green-200">
-                          <CardHeader className="pb-3">
-                            <CardTitle className="text-base">✅ Khuyến Nghị</CardTitle>
-                          </CardHeader>
-                          <CardContent className="space-y-3">
-                            <ul className="space-y-2 text-sm text-muted-foreground">
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Sử dụng LR theo tầng cho Fine-tuning:</strong> Kết quả cho thấy lợi ích cho cả 3 mô hình, không có nhược điểm nào besides slight overhead cho EfficientNet_b0 (+0.42s).</span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Model tốt nhất:** <strong>ViT Base với LR theo tầng</strong> (94.773% Acc, Loss 0.21195, 97.30s/epoch) - accuracy cao nhất và nhanh.</strong></span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Thứ tự theo độ tốt:</strong> 1) ViT Base LR tầng (94.773%), 2) ResNet50 LR tầng (91.384%), 3) EfficientNet_b0 LR tầng (88.48%)</span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Thứ tự theo chi phí:</strong> 1) EfficientNet_b0 (23.41s, 4M params), 2) ResNet50 (34.12s, 23.5M params), 3) ViT Base (97.30s, 85.8M params)</span>
-                              </li>
-                              <li className="flex gap-2">
-                                <span className="text-green-600 font-bold">•</span>
-                                <span><strong>Cho ứng dụng thực tế:</strong> EfficientNet_b0 với LR tầng là lựa chọn cân bằng tốt (88.48% acc, training nhanh nhất, tham số ít) so với ResNet50 đắt đỏ hơn 1.5x.</span>
-                              </li>
-                            </ul>
                           </CardContent>
                         </Card>
                       </div>
