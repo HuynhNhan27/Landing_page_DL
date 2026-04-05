@@ -7,52 +7,45 @@ const BTL1Detail = () => {
   const exercises = [
     {
       number: 1,
-      title: "Weather Image Recognition",
-      description: "Khám phá dữ liệu hình ảnh về thời tiết và xây dựng mô hình ResNet, EfficientNet và ViT.",
+      title: "Bài toán phân loại ảnh",
+      description: "Phân loại ảnh thời tiết 11 lớp, so sánh CNN và ViT, đánh giá bằng confusion matrix và phân tích lỗi.",
       link: "/btl1/exercise1",
       topics: ["Image", "Classification", "Fine-tune"],
     },
     {
       number: 2,
-      title: "Toxic Comment Classification Challenge",
-      description: "Khám phá dữ liệu văn bản và xây dựng mô hình BERT, LSTM.",
+      title: "Bài toán phân loại văn bản",
+      description: "Jigsaw Toxic Comment đa nhãn, so sánh BERT và LSTM theo full/head-only, weighted/non-weighted.",
       link: "/btl1/exercise2",
-      topics: ["Text", "Classification", "Fine-tune"],
+      topics: ["Text", "Multi-label", "Post-test"],
     },
     {
       number: 3,
-      title: "N24News Multimodal Classification",
-      description: "Khám phá dữ liệu ảnh-văn bản và xây dựng mô hình CLIP, VisualBERT.",
+      title: "Bài toán phân loại đa phương thức",
+      description: "N24News text-image với zero/few-shot CLIP và supervised full_finetune, LoRA, deep_head.",
       link: "/btl1/exercise3",
-      topics: ["Text-Image", "Classification", "Fine-tune"],
+      topics: ["Text-Image", "Zero/Few-shot", "PEFT"],
     },
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-ocean-surface/10 to-ocean-deep/20">
-      {/* Navigation */}
       <div className="container mx-auto px-4 py-6">
         <Link to="/">
           <Button variant="ghost" className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" />
             Về trang chủ
           </Button>
         </Link>
       </div>
 
-      {/* Header */}
       <section className="container mx-auto px-4 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-primary">
-            BTL 1 - Classification
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Khám phá dữ liệu hình ảnh, văn bản và hình ảnh-văn bản. Đồng thời, xây dựng mô hình phân loại ứng với 3 loại dữ liệu.
-          </p>
+        <div className="mb-12 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">BTL1 - Classification</h1>
+          <p className="mx-auto max-w-3xl text-xl text-muted-foreground">Tổng hợp ba bài toán của BTL1 theo cùng một giao thức đánh giá.</p>
         </div>
 
-        {/* Exercise Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
           {exercises.map((exercise) => (
             <ExerciseCard
               key={exercise.number}
@@ -66,8 +59,7 @@ const BTL1Detail = () => {
         </div>
       </section>
 
-      {/* Footer spacing */}
-      <div className="py-12"></div>
+      <div className="py-12" />
     </div>
   );
 };

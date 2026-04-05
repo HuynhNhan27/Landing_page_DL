@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, BookOpen } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface ExerciseCardProps {
@@ -14,19 +14,15 @@ interface ExerciseCardProps {
 
 export const ExerciseCard = ({ number, title, description, link, topics = [] }: ExerciseCardProps) => {
   return (
-    <Card className="hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 border-2 border-border bg-card group">
+    <Card className="group border-2 border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <CardHeader>
-        <div className="flex items-start justify-between mb-3">
-          <Badge variant="outline" className="bg-primary/10 text-primary border-primary/30">
+        <div className="mb-3 flex items-start justify-between">
+          <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary">
             Exercise {number}
           </Badge>
         </div>
-        <CardTitle className="text-2xl text-card-foreground group-hover:text-primary transition-colors">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-base mt-2">
-          {description}
-        </CardDescription>
+        <CardTitle className="text-2xl text-card-foreground transition-colors group-hover:text-primary">{title}</CardTitle>
+        <CardDescription className="mt-2 text-base">{description}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {topics.length > 0 && (
@@ -38,13 +34,10 @@ export const ExerciseCard = ({ number, title, description, link, topics = [] }: 
             ))}
           </div>
         )}
-        <Button
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md hover:shadow-lg transition-all"
-          asChild
-        >
+        <Button className="w-full bg-primary text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg" asChild>
           <Link to={link} className="flex items-center justify-center gap-2">
-            <BookOpen className="w-4 h-4" />
-            Xem chi tiết
+            <BookOpen className="h-4 w-4" />
+            Mở trang bài toán
           </Link>
         </Button>
       </CardContent>
