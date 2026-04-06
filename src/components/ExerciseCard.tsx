@@ -18,7 +18,7 @@ export const ExerciseCard = ({ number, title, description, link, topics = [] }: 
       <CardHeader>
         <div className="mb-3 flex items-start justify-between">
           <Badge variant="outline" className="border-primary/30 bg-primary/10 text-primary">
-            Exercise {number}
+            Bài {number}
           </Badge>
         </div>
         <CardTitle className="text-2xl text-card-foreground transition-colors group-hover:text-primary">{title}</CardTitle>

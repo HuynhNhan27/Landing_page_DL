@@ -34,7 +34,7 @@ export const ExerciseTemplate = ({
         <div className="mb-8 text-center">
           <h1 className="mb-4 text-4xl font-bold text-primary md:text-5xl">{title}</h1>
           {description && <p className="mx-auto mb-4 max-w-2xl text-lg leading-relaxed text-foreground">{description}</p>}
-          <p className="text-lg text-muted-foreground">BTL {btlNumber} - Exercise {exerciseNumber}</p>
+          <p className="text-lg text-muted-foreground">BTL {btlNumber} - Bài toán {exerciseNumber}</p>
         </div>
       </section>
 
