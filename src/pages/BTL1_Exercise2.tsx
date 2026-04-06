@@ -126,6 +126,60 @@ const modelRows = [
   },
 ];
 
+const thresholdAblationRows = [
+  {
+    model: "BERT full weighted",
+    tunedMacroF1: "0.5926",
+    defaultMacroF1: "0.5811",
+    note: "tuned cao hơn +0.0116",
+  },
+  {
+    model: "BERT full non-weighted",
+    tunedMacroF1: "0.5853",
+    defaultMacroF1: "0.6038",
+    note: "default 0.5 cao hơn +0.0185",
+  },
+  {
+    model: "LSTM weighted",
+    tunedMacroF1: "0.5225",
+    defaultMacroF1: "0.5246",
+    note: "gần như ngang nhau",
+  },
+  {
+    model: "LSTM non-weighted",
+    tunedMacroF1: "0.4735",
+    defaultMacroF1: "0.4186",
+    note: "tuned cao hơn +0.0549",
+  },
+];
+
+const rareLabelRows = [
+  {
+    label: "severe_toxic",
+    support: "367",
+    bertWeighted: "P 0.2888 / R 0.5531 / F1 0.3794",
+    bertNonWeighted: "P 0.2414 / R 0.7875 / F1 0.3696",
+    lstmWeighted: "P 0.2110 / R 0.7193 / F1 0.3263",
+    lstmNonWeighted: "P 0.2097 / R 0.7330 / F1 0.3261",
+  },
+  {
+    label: "threat",
+    support: "211",
+    bertWeighted: "P 0.3805 / R 0.8152 / F1 0.5189",
+    bertNonWeighted: "P 0.3494 / R 0.8246 / F1 0.4908",
+    lstmWeighted: "P 0.3473 / R 0.5877 / F1 0.4366",
+    lstmNonWeighted: "P 0.1781 / R 0.3555 / F1 0.2373",
+  },
+  {
+    label: "identity_hate",
+    support: "712",
+    bertWeighted: "P 0.5373 / R 0.6980 / F1 0.6072",
+    bertNonWeighted: "P 0.4781 / R 0.8132 / F1 0.6022",
+    lstmWeighted: "P 0.3692 / R 0.5730 / F1 0.4491",
+    lstmNonWeighted: "P 0.3021 / R 0.4256 / F1 0.3534",
+  },
+];
+
 const SectionTitle = ({
   icon: Icon,
   title,
@@ -627,6 +681,61 @@ const BTL1_Exercise2 = () => {
                 </CardContent>
               </Card>
             </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <Card className="border-2">
+                <CardHeader>
+                  <CardTitle>Test ablation: tuned threshold vs default 0.5</CardTitle>
+                  <CardDescription>Đối chiếu trực tiếp trên test split để xem tác động của threshold tuning lên từng biến thể.</CardDescription>
+                </CardHeader>
+                <CardContent className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-muted/50">
+                        <TableHead>Mô hình</TableHead>
+                        <TableHead>Test macro F1 tuned</TableHead>
+                        <TableHead>Test macro F1 default 0.5</TableHead>
+                        <TableHead>Nhận xét</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {thresholdAblationRows.map((row) => (
+                        <TableRow key={row.model}>
+                          <TableCell className="font-medium">{row.model}</TableCell>
+                          <TableCell>{row.tunedMacroF1}</TableCell>
+                          <TableCell>{row.defaultMacroF1}</TableCell>
+                          <TableCell>{row.note}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2">
+                <CardHeader>
+                  <CardTitle>Diễn giải kết quả tuned vs default</CardTitle>
+                  <CardDescription>Phần chênh lệch này được đọc theo đúng giao thức test, không suy ra chỉ từ val macro F1.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4 text-base text-muted-foreground">
+                  <p>
+                    BERT full non-weighted đạt val macro F1 sau threshold tuning cao hơn bản weighted
+                    (0.6941 so với 0.6788), nhưng ở giao thức test tuned-threshold thì BERT full weighted lại nhỉnh hơn
+                    nhẹ về macro F1 (0.5926 so với 0.5853).
+                  </p>
+                  <p>
+                    Nếu bỏ threshold tuning và dùng ngưỡng 0.5 cố định, BERT full non-weighted lại đạt macro F1 test
+                    0.6038, cao hơn 0.5811 của BERT full weighted.
+                  </p>
+                  <Alert className="border-primary/20 bg-primary/5">
+                    <AlertDescription>
+                      Weighted loss và threshold tuning phải được đọc như một tổ hợp. Tách riêng từng thành phần sẽ dễ
+                      dẫn đến kết luận sai về biến thể tốt nhất.
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </section>
 
@@ -677,6 +786,39 @@ const BTL1_Exercise2 = () => {
               />
             </div>
 
+            <Card className="mt-6 border-2">
+              <CardHeader>
+                <CardTitle>Bảng support và P/R/F1 cho ba nhãn hiếm</CardTitle>
+                <CardDescription>Ba nhãn severe_toxic, threat và identity_hate là nơi macro F1 thay đổi mạnh nhất khi đổi weighted loss hoặc threshold policy.</CardDescription>
+              </CardHeader>
+              <CardContent className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow className="bg-muted/50">
+                      <TableHead>Nhãn</TableHead>
+                      <TableHead>Support test</TableHead>
+                      <TableHead>BERT weighted</TableHead>
+                      <TableHead>BERT non-weighted</TableHead>
+                      <TableHead>LSTM weighted</TableHead>
+                      <TableHead>LSTM non-weighted</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {rareLabelRows.map((row) => (
+                      <TableRow key={row.label}>
+                        <TableCell className="font-medium">{row.label}</TableCell>
+                        <TableCell>{row.support}</TableCell>
+                        <TableCell>{row.bertWeighted}</TableCell>
+                        <TableCell>{row.bertNonWeighted}</TableCell>
+                        <TableCell>{row.lstmWeighted}</TableCell>
+                        <TableCell>{row.lstmNonWeighted}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
             <div className="mt-6 grid gap-6 lg:grid-cols-3">
               <Card className="border-2">
                 <CardHeader>
@@ -704,7 +846,12 @@ const BTL1_Exercise2 = () => {
                 </CardHeader>
                 <CardContent className="text-base text-muted-foreground">
                   <p>
-                    Weighted loss không làm mọi metric cùng tăng, nhưng giữ macro F1 tốt hơn rõ ở cả BERT lẫn LSTM. Đây là lựa chọn hợp lý cho bài toán đa nhãn lệch phân phối.
+                    Ở BERT, weighted không làm recall tăng đồng loạt; phần lợi chính đến từ precision cao hơn trên
+                    severe_toxic, threat và identity_hate nên F1 vẫn nhỉnh hơn nhẹ ở ba nhãn này.
+                  </p>
+                  <p className="mt-3">
+                    Ở LSTM, weighted tác động rõ hơn lên recall của threat và identity_hate, nên macro F1 test tăng rõ
+                    so với bản non-weighted.
                   </p>
                 </CardContent>
               </Card>
@@ -736,19 +883,28 @@ const BTL1_Exercise2 = () => {
                   <Card className="border border-border/70">
                     <CardContent className="pt-6 text-base text-muted-foreground">
                       <p className="font-semibold text-foreground">BERT full weighted</p>
-                      <p>Là cấu hình chính thức tốt nhất vì giữ macro F1 cao nhất (0.5926), dù test accuracy (0.8691) thấp hơn nhẹ so với LSTM weighted.</p>
+                      <p>
+                        Là cấu hình công bố chính thức vì giữ macro F1 test cao nhất theo giao thức tuned-threshold
+                        (0.5926) và cân bằng precision/recall tốt hơn ở ba nhãn hiếm.
+                      </p>
                     </CardContent>
                   </Card>
                   <Card className="border border-border/70">
                     <CardContent className="pt-6 text-base text-muted-foreground">
                       <p className="font-semibold text-foreground">LSTM weighted</p>
-                      <p>Đạt test accuracy cao nhất (0.8728), nhưng vẫn thua BERT đáng kể ở macro F1 nên chưa phải lựa chọn tốt nhất cho nhãn hiếm.</p>
+                      <p>
+                        Đạt test accuracy cao nhất (0.8728), nhưng macro F1 vẫn thấp hơn BERT. Weighted loss chủ yếu
+                        giúp LSTM ở threat và identity_hate nhờ recall tăng rõ hơn.
+                      </p>
                     </CardContent>
                   </Card>
                   <Card className="border border-border/70">
                     <CardContent className="pt-6 text-base text-muted-foreground">
-                      <p className="font-semibold text-foreground">Head-only</p>
-                      <p>Cho thấy rõ đóng băng encoder không đủ mạnh cho bài toán này, nên full fine-tune là lựa chọn đáng giữ lại.</p>
+                      <p className="font-semibold text-foreground">Threshold policy</p>
+                      <p>
+                        BERT non-weighted mạnh hơn trên val sau threshold tuning và cả trên test khi dùng ngưỡng 0.5 cố
+                        định, nên kết quả cuối phải luôn đọc cùng loss setting và threshold setting.
+                      </p>
                     </CardContent>
                   </Card>
                 </div>
