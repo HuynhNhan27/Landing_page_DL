@@ -18,8 +18,9 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-import labelDistributionImg from "@/assets/1.2/text_label_distribution_public.png";
-import labelCorrelationImg from "@/assets/1.2/text_label_correlation_public.png";
+import rawLabelDistributionImg from "@/assets/1.2/text_raw_label_distribution_crop_public.png";
+import labelCoOccurrenceImg from "@/assets/1.2/text_label_cooccurrence_crop_public.png";
+import labelCorrelationImg from "@/assets/1.2/text_label_correlation_crop_public.png";
 import splitBalanceImg from "@/assets/1.2/text_split_balance_public.png";
 import vocabOovImg from "@/assets/1.2/text_vocab_oov_public.png";
 import bertCurveImg from "@/assets/1.2/text_bert_learning_curve_public.png";
@@ -297,7 +298,7 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={Database}
               title="Dataset Introduction"
-              description="Bài toán nhắm tới nhận diện 6 loại ngôn ngữ độc hại trong bình luận người dùng. Cấu trúc section này được giữ cùng nhịp với Exercise 1: thống kê dữ liệu rõ ràng, có mẫu thật và có lý do chọn macro F1."
+              description="Bài toán nhắm tới nhận diện 6 loại nhãn độc hại trong bình luận người dùng. "
             />
 
             <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
@@ -326,16 +327,16 @@ const BTL1_Exercise2 = () => {
                   <Alert className="border-amber-500/30 bg-amber-500/5">
                     <Info className="h-4 w-4 text-amber-600" />
                     <AlertDescription>
-                      Severe toxic, threat và identity hate rất hiếm. Vì vậy landing page luôn đọc kết quả theo macro F1 và per-label behavior, không chỉ nhìn exact-match hay micro F1.
+                      Severe toxic, threat và identity hate rất hiếm.
                     </AlertDescription>
                   </Alert>
                 </CardContent>
               </Card>
 
               <FigureCard
-                title="Tỷ lệ nhãn dương"
+                title="Raw label distribution"
                 description="Toxic, obscene và insult chiếm phần lớn các trường hợp dương; severe toxic, threat và identity hate mỏng hơn nhiều."
-                src={labelDistributionImg}
+                src={rawLabelDistributionImg}
                 alt="Text label distribution"
               >
                 <Alert className="border-primary/20 bg-primary/5">
@@ -367,10 +368,23 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={BarChart3}
               title="EDA"
-              description="EDA đi theo đúng logic trình bày của nhánh image: chỉ ra vấn đề dữ liệu trước, rồi mới biện minh cho split strategy và weighted loss."
+              description=""
             />
 
-            <div className="grid gap-6 lg:grid-cols-2">
+            <div className="grid gap-6 lg:grid-cols-3">
+              <FigureCard
+                title="Đồng xuất hiện giữa các nhãn"
+                description="Ma trận co-occurrence cho thấy toxic thường đi cùng obscene và insult, còn threat/identity hate xuất hiện ít hơn và rời rạc hơn."
+                src={labelCoOccurrenceImg}
+                alt="Text label co-occurrence"
+              >
+                <Alert className="border-blue-500/30 bg-blue-500/5">
+                  <AlertDescription>
+                    Co-occurrence giúp giải thích vì sao một số nhãn được kéo theo nhau khi mô hình dự đoán đa nhãn.
+                  </AlertDescription>
+                </Alert>
+              </FigureCard>
+
               <FigureCard
                 title="Tương quan giữa các nhãn"
                 description="Obscene và insult đồng biến mạnh với toxic, trong khi threat và identity hate tạo thành cụm khó hơn do ít mẫu."
@@ -405,14 +419,14 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={BookOpenCheck}
               title="Dataset, DataLoader"
-              description="Sau EDA, pipeline nạp dữ liệu được khóa lại để hai họ mô hình dùng cùng split nhưng khác cách biểu diễn văn bản."
+            description=""
             />
 
             <div className="grid gap-6 lg:grid-cols-[1.02fr_0.98fr]">
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Thiết lập xử lý dữ liệu</CardTitle>
-                  <CardDescription>Hai nhánh dùng cùng processed split nhưng khác encoder và cách kiểm soát OOV.</CardDescription>
+                  <CardDescription></CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4 text-base text-muted-foreground">
                   <div className="grid gap-3 md:grid-cols-2">
@@ -435,15 +449,15 @@ const BTL1_Exercise2 = () => {
               </Card>
 
               <FigureCard
-                title="Rủi ro OOV theo split"
+                title="OOV theo split"
                 description="Khi vocabulary của LSTM giữ đủ token train, tỷ lệ OOV ở val/test còn thấp và nằm trong mức chấp nhận được."
                 src={vocabOovImg}
                 alt="Text OOV summary"
               >
                 <Alert className="border-primary/20 bg-primary/5">
-                  <AlertDescription>
+                  {/* <AlertDescription>
                     Việc giữ full vocabulary train là điểm quan trọng để baseline LSTM phản ánh đúng giới hạn mô hình, thay vì bị trừ điểm oan vì build vocab quá chặt.
-                  </AlertDescription>
+                  </AlertDescription> */}
                 </Alert>
               </FigureCard>
             </div>
@@ -455,7 +469,8 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={BrainCircuit}
               title="Models"
-              description="Phần mô hình được giữ đơn giản nhưng đủ rõ logic so sánh: BERT đo lợi ích transfer learning, còn LSTM là baseline tuần tự để soi nhánh hiếm."
+              description=""
+              // description="Phần mô hình được giữ đơn giản nhưng đủ rõ logic so sánh: BERT đo lợi ích transfer learning, còn LSTM là baseline tuần tự để soi nhánh hiếm."
             />
 
             <div className="grid gap-6 lg:grid-cols-2">
@@ -465,7 +480,7 @@ const BTL1_Exercise2 = () => {
                   <CardDescription>So sánh full fine-tune với head-only trên cùng checkpoint khởi tạo.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3 text-base text-muted-foreground">
-                  <p>Full fine-tune cho phép cập nhật toàn bộ encoder; head-only dùng để đo giá trị thực của việc mở toàn mô hình.</p>
+                  <p>Full fine-tune cho phép cập nhật toàn bộ encoder; head-only dùng để đo giá trị thực của việc đóng băng backbone mô hình.</p>
                   <p>Mỗi nhánh lại được chạy thêm weighted và non-weighted để đo riêng ảnh hưởng của class imbalance.</p>
                 </CardContent>
               </Card>
@@ -473,11 +488,11 @@ const BTL1_Exercise2 = () => {
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>LSTM</CardTitle>
-                  <CardDescription>Baseline tuần tự bám cùng split và cùng giao thức đánh giá với BERT.</CardDescription>
+                  <CardDescription>Baseline tuần tự.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-3 text-base text-muted-foreground">
-                  <p>LSTM weighted / non-weighted giúp đo trực tiếp khoảng cách giữa contextual encoder và baseline truyền thống.</p>
-                  <p>Đây là mốc tham chiếu cần có trong một bài toán học thuật, thay vì chỉ công bố best model cuối cùng.</p>
+                  <p>LSTM weighted / non-weighted giúp so sánh việc sử dụng trọng số trong xử lý class imbalance.</p>
+          
                 </CardContent>
               </Card>
             </div>
@@ -552,7 +567,8 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={GitCompareArrows}
               title="Train Result"
-              description="Phần kết quả giữ đúng tinh thần ex1: có khối tổng hợp ngắn để quét nhanh, sau đó mới đi vào chart và bảng chi tiết."
+              description=""
+              // description="Phần kết quả giữ đúng tinh thần ex1: có khối tổng hợp ngắn để quét nhanh, sau đó mới đi vào chart và bảng chi tiết."
             />
 
             <Card className="mb-6 border-2 border-emerald-500/20 bg-emerald-500/5">
@@ -619,7 +635,8 @@ const BTL1_Exercise2 = () => {
             <SectionTitle
               icon={ShieldAlert}
               title="Phân tích kết quả"
-              description="Phần cuối được làm dày theo cùng tinh thần ex1: không dừng ở một chart tổng hợp, mà hạ xuống inference examples, confusion matrix của cả BERT và LSTM, per-label F1 và kết luận lỗi hiếm."
+              description=""
+              // description="Phần cuối được làm dày theo cùng tinh thần ex1: không dừng ở một chart tổng hợp, mà hạ xuống inference examples, confusion matrix của cả BERT và LSTM, per-label F1 và kết luận lỗi hiếm."
             />
 
             <Card className="mb-6 border-2">

@@ -24,6 +24,8 @@ import fieldMissingnessImg from "@/assets/1.3/n24news_field_missingness_public.p
 import textPolicyImg from "@/assets/1.3/n24news_text_policy_public.png";
 import clipCurveImg from "@/assets/1.3/n24news_clip_learning_curve_public.png";
 import visualBertCurveImg from "@/assets/1.3/n24news_visualbert_learning_curve_public.png";
+import clipFullValMetricsImg from "@/assets/1.3/n24news_clip_full_finetune_val_metrics_public.png";
+import visualBertFullValMetricsImg from "@/assets/1.3/n24news_visualbert_full_finetune_val_metrics_public.png";
 import clipDeepHeadCurveImg from "@/assets/1.3/n24news_clip_deep_head_learning_curve_public.png";
 import clipLoraCurveImg from "@/assets/1.3/n24news_clip_lora_learning_curve_public.png";
 import visualBertDeepHeadCurveImg from "@/assets/1.3/n24news_visualbert_deep_head_learning_curve_public.png";
@@ -32,6 +34,8 @@ import zeroFewAccuracyImg from "@/assets/1.3/n24news_zero_few_accuracy_public.pn
 import zeroFewMacroF1Img from "@/assets/1.3/n24news_zero_few_macro_f1_public.png";
 import supervisedMacroF1Img from "@/assets/1.3/n24news_supervised_macro_f1_public.png";
 import labelDistributionImg from "@/assets/1.3/n24news_label_distribution_public.png";
+import splitCategoryHeatmapImg from "@/assets/1.3/n24news_split_category_heatmap_public.png";
+import textLabelDistributionImg from "@/assets/1.2/text_label_distribution_public.png";
 import visualBertConfusionImg from "@/assets/1.3/n24news_visualbert_confusion_public.png";
 import clipConfusionImg from "@/assets/1.3/n24news_clip_confusion_public.png";
 import caseTypeImg from "@/assets/1.3/n24news_case_type_public.png";
@@ -65,12 +69,50 @@ const sampleImageMap = Object.fromEntries(
 );
 
 const supervisedRows = [
-  ["VisualBERT full fine-tune", "0.8555", "0.8456", "0.8555"],
-  ["CLIP full fine-tune", "0.8421", "0.8250", "0.8421"],
-  ["CLIP LoRA", "0.8388", "0.8230", "0.8388"],
-  ["CLIP deep head", "0.8225", "0.8075", "0.8225"],
-  ["VisualBERT LoRA", "0.8023", "0.7777", "0.8023"],
-  ["VisualBERT deep head", "0.7183", "0.6777", "0.7183"],
+  { model: "VisualBERT full fine-tune", testAcc: "0.8555", testMacroF1: "0.8456", testMicroF1: "0.8555" },
+  { model: "CLIP full fine-tune", testAcc: "0.8421", testMacroF1: "0.8250", testMicroF1: "0.8421" },
+  { model: "CLIP LoRA", testAcc: "0.8388", testMacroF1: "0.8230", testMicroF1: "0.8388" },
+  { model: "CLIP deep head", testAcc: "0.8225", testMacroF1: "0.8075", testMicroF1: "0.8225" },
+  { model: "VisualBERT LoRA", testAcc: "0.8023", testMacroF1: "0.7777", testMicroF1: "0.8023" },
+  { model: "VisualBERT deep head", testAcc: "0.7183", testMacroF1: "0.6777", testMicroF1: "0.7183" },
+];
+
+const textThresholdRows = [
+  {
+    model: "BERT full weighted",
+    tunedValMacroF1: "0.6788",
+    testMacroF1: "0.5926",
+    thresholds: "tox 0.90 | sev 0.90 | obs 0.70 | thr 0.40 | ins 0.55 | idh 0.75",
+    source: "notebook output",
+  },
+  {
+    model: "BERT full non-weighted",
+    tunedValMacroF1: "0.6941",
+    testMacroF1: "0.5853",
+    thresholds: "tox 0.60 | sev 0.30 | obs 0.60 | thr 0.25 | ins 0.45 | idh 0.20",
+    source: "run_logs summary",
+  },
+  {
+    model: "LSTM weighted",
+    tunedValMacroF1: "0.6287",
+    testMacroF1: "0.5225",
+    thresholds: "tox 0.60 | sev 0.40 | obs 0.50 | thr 0.50 | ins 0.50 | idh 0.35",
+    source: "run_logs summary",
+  },
+  {
+    model: "LSTM non-weighted",
+    tunedValMacroF1: "0.5681",
+    testMacroF1: "0.4735",
+    thresholds: "tox 0.45 | sev 0.15 | obs 0.45 | thr 0.10 | ins 0.35 | idh 0.15",
+    source: "run_logs summary",
+  },
+  {
+    model: "BERT head-only non-weighted",
+    tunedValMacroF1: "0.4124",
+    testMacroF1: "0.3738",
+    thresholds: "tox 0.25 | sev 0.15 | obs 0.20 | thr 0.10 | ins 0.20 | idh 0.10",
+    source: "run_logs summary",
+  },
 ];
 
 const SectionTitle = ({
@@ -182,7 +224,8 @@ const BTL1_Exercise3 = () => {
             <SectionTitle
               icon={Database}
               title="Dataset Introduction"
-              description="Phần mở đầu giữ cùng triết lý với Exercise 1: thống kê dữ liệu rõ ràng, sample thật đủ ngữ cảnh và một card riêng để nhìn nhanh đặc điểm của N24News."
+              description=""
+              // description="Phần mở đầu giữ cùng triết lý với Exercise 1: thống kê dữ liệu rõ ràng, sample thật đủ ngữ cảnh và một card riêng để nhìn nhanh đặc điểm của N24News."
             />
 
             <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
@@ -281,6 +324,61 @@ const BTL1_Exercise3 = () => {
                 </Alert>
               </FigureCard>
             </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <FigureCard
+                title="Multimodal: phân phối nhãn theo split"
+                description="Bổ sung heatmap train/val/test theo từng nhãn để đọc trực diện head-tail structure ngay từ phần dữ liệu, không chờ tới confusion matrix."
+                src={splitCategoryHeatmapImg}
+                alt="N24News split-by-category heatmap"
+              />
+              <FigureCard
+                title="Text: phân phối nhãn độc hại"
+                description="Giữ chart text đa nhãn ngay trong ex3 để nối trực tiếp với block threshold tuning và lý do ưu tiên macro F1 cho nhãn hiếm."
+                src={textLabelDistributionImg}
+                alt="Text label distribution reference"
+              />
+            </div>
+
+            <Card className="mt-6 border-2">
+              <CardHeader>
+                <CardTitle>Text threshold tuning: kết quả cuối dùng khi suy luận</CardTitle>
+                <CardDescription>
+                  Ngưỡng dự đoán theo nhãn được tune trên val trước khi đánh giá test. Bảng này chỉ hiển thị post-threshold metrics để phản ánh đúng quality ở bước inference, tách khỏi val metric trong train history.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow className="bg-muted/50">
+                        <TableHead>Model</TableHead>
+                        <TableHead>Val tuned macro F1</TableHead>
+                        <TableHead>Test macro F1</TableHead>
+                        <TableHead>Thresholds (tox, sev, obs, thr, ins, idh)</TableHead>
+                        <TableHead>Source</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {textThresholdRows.map((row) => (
+                        <TableRow key={row.model}>
+                          <TableCell className="font-medium">{row.model}</TableCell>
+                          <TableCell>{row.tunedValMacroF1}</TableCell>
+                          <TableCell>{row.testMacroF1}</TableCell>
+                          <TableCell className="text-xs md:text-sm">{row.thresholds}</TableCell>
+                          <TableCell>{row.source}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+                <Alert className="border-blue-500/30 bg-blue-500/5">
+                  <AlertDescription>
+                    Vì ngưỡng được tune riêng cho từng nhãn, metric trong bảng này không đồng nhất ngữ nghĩa với val macro/micro F1 trong history train. Tách hai nhóm metric giúp tránh đọc nhầm giữa chất lượng training và chất lượng inference sau calibration.
+                  </AlertDescription>
+                </Alert>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
@@ -329,7 +427,8 @@ const BTL1_Exercise3 = () => {
             <SectionTitle
               icon={BrainCircuit}
               title="Models"
-              description="Phần mô hình được trình bày tách bạch theo đúng vai trò: CLIP để đo lợi ích pretraining ở nhiều giao thức, còn VisualBERT là mốc fusion supervised chuyên dụng."
+              description=""
+              // description="Phần mô hình được trình bày tách bạch theo đúng vai trò: CLIP để đo lợi ích pretraining ở nhiều giao thức, còn VisualBERT là mốc fusion supervised chuyên dụng."
             />
 
             <div className="grid gap-6 lg:grid-cols-2">
@@ -364,7 +463,8 @@ const BTL1_Exercise3 = () => {
             <SectionTitle
               icon={TrendingUp}
               title="Train"
-              description="Các learning curves được tách riêng cho đủ sáu biến thể supervised, giúp đọc rõ đâu là nhánh hội tụ ổn định và đâu là cấu hình suy giảm mạnh."
+              description=""
+              // description="Các learning curves được tách riêng cho đủ sáu biến thể supervised, giúp đọc rõ đâu là nhánh hội tụ ổn định và đâu là cấu hình suy giảm mạnh."
             />
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -374,6 +474,21 @@ const BTL1_Exercise3 = () => {
               <FigureCard title="VisualBERT full fine-tune" description="Nhánh mạnh nhất trong nhóm supervised." src={visualBertCurveImg} alt="VisualBERT full fine-tune learning curve" />
               <FigureCard title="VisualBERT LoRA" description="Giảm tham số cập nhật nhưng hụt khá rõ so với bản full." src={visualBertLoraCurveImg} alt="VisualBERT LoRA learning curve" />
               <FigureCard title="VisualBERT deep head" description="Biến thể suy giảm mạnh nhất về chất lượng." src={visualBertDeepHeadCurveImg} alt="VisualBERT deep head learning curve" />
+            </div>
+
+            <div className="mt-6 grid gap-6 lg:grid-cols-2">
+              <FigureCard
+                title="CLIP full fine-tune: validation metrics"
+                description="Theo dõi riêng val accuracy và val macro F1 cho mốc CLIP full fine-tune để đọc rõ điểm hội tụ validation."
+                src={clipFullValMetricsImg}
+                alt="CLIP full fine-tune validation metrics"
+              />
+              <FigureCard
+                title="VisualBERT full fine-tune: validation metrics"
+                description="Val accuracy và val macro F1 của VisualBERT full fine-tune duy trì ổn định ở vùng cao hơn CLIP trên cùng protocol."
+                src={visualBertFullValMetricsImg}
+                alt="VisualBERT full fine-tune validation metrics"
+              />
             </div>
           </div>
         </section>
@@ -441,14 +556,11 @@ const BTL1_Exercise3 = () => {
                     </TableHeader>
                     <TableBody>
                       {supervisedRows.map((row) => (
-                        <TableRow key={row[0]}>
-                          <TableCell className="font-medium">{row[0]}</TableCell>
-                          <TableCell>{row[1]}</TableCell>
-                          <TableCell>{row[2]}</TableCell>
-                          <TableCell>{row[3]}</TableCell>
-                          <TableCell>{row[4]}</TableCell>
-                          <TableCell>{row[5]}</TableCell>
-                          <TableCell>{row[6]}</TableCell>
+                        <TableRow key={row.model}>
+                          <TableCell className="font-medium">{row.model}</TableCell>
+                          <TableCell>{row.testAcc}</TableCell>
+                          <TableCell>{row.testMacroF1}</TableCell>
+                          <TableCell>{row.testMicroF1}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
@@ -527,7 +639,7 @@ const BTL1_Exercise3 = () => {
               />
             </div>
 
-            <div className="mt-6 grid gap-6 lg:grid-cols-1">
+            {/* <div className="mt-6 grid gap-6 lg:grid-cols-1">
               <Card className="border-2">
                 <CardHeader>
                   <CardTitle>Vì sao confusion matrix khó giải thích nếu chỉ nhìn riêng nó?</CardTitle>
@@ -544,7 +656,7 @@ const BTL1_Exercise3 = () => {
                   </Alert>
                 </CardContent>
               </Card>
-            </div>
+            </div> */}
 
             <div className="mt-6 grid gap-6 lg:grid-cols-2">
               <FigureCard
@@ -574,7 +686,7 @@ const BTL1_Exercise3 = () => {
             <Card className="border-2">
               <CardHeader>
                 <CardTitle className="text-3xl">Tổng kết bài toán đa phương thức</CardTitle>
-                <CardDescription>Kết luận này bám hoàn toàn vào artifacts hiện có, không suy diễn vượt quá notebook truth.</CardDescription>
+                {/* <CardDescription>Kết luận này bám hoàn toàn vào artifacts hiện có, không suy diễn vượt quá notebook truth.</CardDescription> */}
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="grid gap-4 md:grid-cols-3">
