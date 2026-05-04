@@ -1014,10 +1014,10 @@ const BTL1_Exercise1 = () => {
                         <div>
                           <h4 className="font-semibold text-foreground mb-2 flex items-center gap-2">
                             <CheckCircle2 className="w-5 h-5 text-green-600" />
-                            Ảnh 2: Frost (Sương muối)
+                            Ảnh 2: Hail (Mưa đá)
                           </h4>
                           <p className="text-sm text-muted-foreground">
-                            Mô hình bắt được vùng đá sương muối trên tay người. Activation map tập trung vào các tinh thể đá và kết cấu sương muối đặc trưng.
+                            Mô hình bắt được vùng đá trên tay người. Activation map tập trung vào các tinh thể đá đặc trưng.
                           </p>
                         </div>
 
